@@ -13,7 +13,7 @@ Route::get('/', function () {
 });
 
 
-Route::prefix('admin')->group(function(){
+            Route::prefix('admin')->group(function(){
 
       Route::get('/',[AdminDashboardController::class , 'index'])->name('admin.home');
       
@@ -26,12 +26,12 @@ Route::prefix('admin')->group(function(){
                   Route::get('/create',[ContentCategoryController::class , 'create'])->name('admin.content.category.create');
                   Route::post('/store',[ContentCategoryController::class , 'store'])->name('admin.content.category.store');
                   Route::get('/edit',[ContentCategoryController::class , 'edit'])->name('admin.content.category.edit');
-                  Route::patch('/update/{postCategory}',[ContentCategoryController::class , 'update'])->name('admin.content.category.update');
-                  Route::delete('/destroy/{postCategory}',[ContentCategoryController::class , 'edit'])->name('admin.content.category.destroy');
-                  Route::get('/status/{postCategory}', [ContentCategoryController::class, 'status'])->name('admin.content.category.status');
+                  Route::patch('/update',[ContentCategoryController::class , 'update'])->name('admin.content.category.update');
+                  Route::delete('/destroy',[ContentCategoryController::class , 'edit'])->name('admin.content.category.destroy');
+                  Route::get('/status', [ContentCategoryController::class, 'status'])->name('admin.content.category.status');
             });
-
               //post
+
                   Route::prefix('post')->group(function(){
                   Route::get('/',[PostController::class , 'index'])->name('admin.content.post.index');
                   Route::get('/create',[PostController::class , 'create'])->name('admin.content.post.create');
@@ -41,6 +41,7 @@ Route::prefix('admin')->group(function(){
                   Route::delete('/destroy',[PostController::class , 'edit'])->name('admin.content.post.destroy');
                   Route::get('/status', [PostController::class, 'status'])->name('admin.content.post.status');
                   
+
 
             });
 

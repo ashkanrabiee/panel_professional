@@ -1,7 +1,9 @@
 @extends('panel.layouts.master')
 
 @section('head-tag')
-    <title>پست ها</title>
+
+    <title>دسته بندی</title>
+
 @endsection
 
 
@@ -86,6 +88,7 @@
                 </div>
             </div>
             <!-- END: Form Layout -->
+
         </div>
     </div>
 </div>
