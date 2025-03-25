@@ -1,7 +1,7 @@
 @extends('panel.layouts.master')
 
 @section('head-tag')
-    <title>پست ها </title>
+    <title>سوالات متداول</title>
 @endsection
 
 
@@ -9,7 +9,7 @@
 @section('content')
 <div class="grid grid-cols-12 gap-6 mt-5">
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-no-wrap items-center mt-2">
-        <button class="button text-white bg-theme-1 shadow-md mr-2"><a href="{{ route('admin.content.category.create') }}">ایجاد دسته بندی</a></button>
+        <button class="button text-white bg-theme-1 shadow-md mr-2"><a href="{{ route('admin.content.faq.index') }}">ایجاد دسته بندی</a></button>
         <div class="dropdown relative">
             <button class="dropdown-toggle button px-2 box text-gray-700">
                 <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4" data-feather="plus"></i> </span>
@@ -71,7 +71,7 @@
                     </td>
                     <td class="table-report__action w-56">
                         <div class="flex justify-center items-center">
-                            <a class="flex items-center mr-3" href="{{ route('admin.content.category.edit') }}"> <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
+                            <a class="flex items-center mr-3" href="{{ route('admin.content.faq.edit') }}"> <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
                             <a class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
                         </div>
                     </td>

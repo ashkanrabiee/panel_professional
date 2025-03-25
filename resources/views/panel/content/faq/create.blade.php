@@ -1,7 +1,7 @@
 @extends('panel.layouts.master')
 
 @section('head-tag')
-    <title> پست ها</title>
+    <title> سوالات متداول</title>
 @endsection
 
 

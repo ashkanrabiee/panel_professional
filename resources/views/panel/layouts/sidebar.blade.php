@@ -199,27 +199,27 @@
                     </a>
                 </li>
                 <li>
-                    <a href="index.html" class="side-menu">
+                    <a href="{{ route('admin.content.comment.index') }}" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                        <div class="side-menu__title"> Comments </div>
+                        <div class="side-menu__title"> نظرات </div>
                     </a>
                 </li>
                 <li>
-                    <a href="simple-menu-dashboard.html" class="side-menu">
+                    <a href="{{ route('admin.content.menu.index') }}" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                        <div class="side-menu__title"> Menu </div>
+                        <div class="side-menu__title"> منو ها </div>
                     </a>
                 </li>
                 <li>
-                    <a href="top-menu-dashboard.html" class="side-menu">
+                    <a href="{{ route('admin.content.faq.index') }}" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                        <div class="side-menu__title">  FAQ </div>
+                        <div class="side-menu__title">  سوالات متداول </div>
                     </a>
                 </li>
                 <li>
-                    <a href="top-menu-dashboard.html" class="side-menu">
+                    <a href="{{ route('admin.content.banner.index') }}" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                        <div class="side-menu__title"> Banners </div>
+                        <div class="side-menu__title"> بنرها </div>
                     </a>
                 </li>
             </ul>
