@@ -15,7 +15,7 @@ Route::get('/', function () {
    return view('welcome');
 });
 
-
+//admin
 Route::prefix('admin')->group(function(){
 
       Route::get('/',[AdminDashboardController::class , 'index'])->name('admin.home');
