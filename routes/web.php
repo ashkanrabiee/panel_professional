@@ -10,7 +10,7 @@ use App\Http\Controllers\Admin\{AdminDashboardController};
 use App\Http\Controllers\Admin\Content\{BannnerController, CategoryController as ContentCategoryController, CommentController as ContentCommentController, FaqController, MenuController, PostController};
 
 //setting
-use App\Http\Controllers\Admin\setting\SettingController;
+use App\Http\Controllers\Admin\Setting\SettingController;
 
 
 

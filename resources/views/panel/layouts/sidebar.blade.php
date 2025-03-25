@@ -6,7 +6,7 @@
     <div class="side-nav__devider my-6"></div>
     <ul>
         <li>
-            <a href="index.html" class="side-menu side-menu--active">
+            <a href="index.html" class="side-menu ">
                 <div class="side-menu__icon"> <i data-feather="home"></i> </div>
                 <div class="side-menu__title"> Dashboard </div>
             </a>
@@ -180,13 +180,29 @@
 
 
         <li>
-            <a href="javascript:;" class="side-menu">
+            <a href="javascript:;" class="side-menu @if (Route::is('admin.content.category.index') ||
+            Route::is('admin.content.post.index') ||
+            Route::is('admin.content.comment.index') ||
+            Route::is('admin.content.menu.index') ||
+            Route::is('admin.content.faq.index') ||
+            Route::is('admin.content.banner.index') 
+            )
+                side-menu--active side-menu--open
+            @endif">
                 <div class="side-menu__icon"> <i data-feather="box"></i> </div>
                 <div class="side-menu__title"> بخش محتوی <i data-feather="chevron-down" class="side-menu__sub-icon">
                     </i> </div>
             </a>
-            <ul class="">
-                <li>
+            <ul @if (Route::is('admin.content.category.index') ||
+            Route::is('admin.content.post.index') ||
+            Route::is('admin.content.comment.index') ||
+            Route::is('admin.content.menu.index') ||
+            Route::is('admin.content.faq.index') ||
+            Route::is('admin.content.banner.index') 
+            )
+                class="side-menu__sub-open" style="display: block">
+            @endif
+                            <li>
                     <a href="{{ route('admin.content.category.index') }}" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
                         <div class="side-menu__title"> دسته بندی </div>
@@ -377,7 +393,9 @@
 
 
         <li>
-            <a href="javascript:;" class="side-menu">
+            <a href="{{route("admin.setting.index")}}" class="side-menu @if (Route::is('admin.setting.index'))
+                side-menu--active
+            @endif">
                 <div class="side-menu__icon"> <i data-feather="activity"></i>  </div>
                 <div class="side-menu__title"> تنظیمات  </div>
             </a>
