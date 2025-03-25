@@ -7,5 +7,21 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    //
+    public function index()
+    {
+        return view('panel.content.post.index');
+    }
+
+    public function create()
+    {
+        return view('panel.content.category.create');
+    }
+
+    public function edit()
+    {
+        return view('panel.content.category.edit');
+    }
+
+
+
 }

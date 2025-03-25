@@ -1,7 +1,7 @@
 @extends('panel.layouts.master')
 
 @section('head-tag')
-    <title>Category</title>
+    <title>پست ها </title>
 @endsection
 
 
