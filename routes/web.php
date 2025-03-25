@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\{AdminDashboardController};
 // Content Section 
 use App\Http\Controllers\Admin\Content\{CategoryController as ContentCategoryController, PostController};
-use App\Http\Controllers\Admin\setting\SettingController;
+use App\Http\Controllers\Admin\Setting\SettingController as settingcontrol;
 
 
 
@@ -49,11 +49,11 @@ Route::get('/', function () {
       });
 
           Route::prefix('setting')->group(function(){
-            Route::get('/',[SettingController::class , 'index'])->name('admin.setting.index');
-            Route::get('/create',[SettingController::class , 'create'])->name('admin.setting.create');
-            Route::post('/store',[SettingController::class , 'store'])->name('admin.setting.store');
-            Route::get('/edit/{postCategory}',[SettingController::class , 'edit'])->name('admin.setting.edit');
-            Route::patch('/update/{postCategory}',[SettingController::class , 'update'])->name('admin.setting.update');
+            Route::get('/',[settingcontrol::class , 'index'])->name('admin.setting.index');
+            Route::get('/create',[settingcontrol::class , 'create'])->name('admin.setting.create');
+            Route::post('/store',[settingcontrol::class , 'store'])->name('admin.setting.store');
+            Route::get('/edit/{postCategory}',[settingcontrol::class , 'edit'])->name('admin.setting.edit');
+            Route::patch('/update/{postCategory}',[settingcontrol::class , 'update'])->name('admin.setting.update');
       });
 
 

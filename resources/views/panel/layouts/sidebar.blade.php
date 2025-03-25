@@ -378,19 +378,10 @@
 
         <li>
             <a href="javascript:;" class="side-menu">
-                <div class="side-menu__icon"> <i data-feather="box"></i> </div>
-                <div class="side-menu__title"> Settings <i data-feather="chevron-down" class="side-menu__sub-icon">
-                    </i> </div>
+                <div class="side-menu__icon"> <i data-feather="activity"></i>  </div>
+                <div class="side-menu__title"> تنظیمات  </div>
             </a>
-            <ul class="">
-                <li>
-                    <a href="index.html" class="side-menu">
-                        <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                        <div class="side-menu__title"> Settings </div>
-                    </a>
-                </li>
-             
-            </ul>
+          
         </li>
 
         <li class="side-nav__devider my-6"></li>
