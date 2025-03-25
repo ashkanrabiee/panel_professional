@@ -17,12 +17,10 @@ Route::prefix('admin')->group(function(){
 
       Route::get('/',[AdminDashboardController::class , 'index'])->name('admin.home');
       
-
-
-
-
                   Route::prefix('content')->group(function(){
 
+
+                  //category
                   Route::prefix('category')->group(function(){
                   Route::get('/',[ContentCategoryController::class , 'index'])->name('admin.content.category.index');
                   Route::get('/create',[ContentCategoryController::class , 'create'])->name('admin.content.category.create');
@@ -34,29 +32,16 @@ Route::prefix('admin')->group(function(){
             });
 
               //post
-         Route::prefix('post')->group(function(){
-            Route::get('/' , [PostController::class , 'index']);
-            Route::get('/crteate' , [PostController::class , 'create']);
-            Route::get('/crteate' , [PostController::class , 'tjihu']);
-      });
+            Route::prefix('post')->group(function(){
 
+                  
 
-
-
-
- 
-
-       
-
+            });
 
 
       });
 
-       //setting
-
-      });
-
-            Route::prefix('setting')->group(function(){
+          Route::prefix('setting')->group(function(){
             Route::get('/',[SettingController::class , 'index'])->name('admin.setting.index');
             Route::get('/create',[SettingController::class , 'create'])->name('admin.setting.create');
             Route::post('/store',[SettingController::class , 'store'])->name('admin.setting.store');
@@ -64,6 +49,16 @@ Route::prefix('admin')->group(function(){
             Route::patch('/update/{postCategory}',[SettingController::class , 'update'])->name('admin.setting.update');
       });
 
+
+
+
+
+
+      });
+
+  
+
+          
 
 
 
