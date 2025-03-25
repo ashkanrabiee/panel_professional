@@ -14,12 +14,12 @@ class PostController extends Controller
 
     public function create()
     {
-        return view('panel.content.category.create');
+        return view('panel.content.post.create');
     }
 
     public function edit()
     {
-        return view('panel.content.category.edit');
+        return view('panel.content.post.edit');
     }
 
 
