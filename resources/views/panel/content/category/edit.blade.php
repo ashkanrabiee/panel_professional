@@ -1,7 +1,9 @@
 @extends('panel.layouts.master')
 
 @section('head-tag')
+
     <title>دسته بندی</title>
+
 @endsection
 
 
@@ -86,7 +88,7 @@
                 </div>
             </div>
             <!-- END: Form Layout -->
-            //yf
+
         </div>
     </div>
 </div>

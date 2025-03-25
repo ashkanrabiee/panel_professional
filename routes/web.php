@@ -31,8 +31,16 @@ Route::get('/', function () {
                   Route::get('/status', [ContentCategoryController::class, 'status'])->name('admin.content.category.status');
             });
               //post
-            Route::prefix('post')->group(function(){
 
+                  Route::prefix('post')->group(function(){
+                  Route::get('/',[PostController::class , 'index'])->name('admin.content.post.index');
+                  Route::get('/create',[PostController::class , 'create'])->name('admin.content.post.create');
+                  Route::post('/store',[PostController::class , 'store'])->name('admin.content.post.store');
+                  Route::get('/edit',[PostController::class , 'edit'])->name('admin.content.post.edit');
+                  Route::patch('/update',[PostController::class , 'update'])->name('admin.content.post.update');
+                  Route::delete('/destroy',[PostController::class , 'edit'])->name('admin.content.post.destroy');
+                  Route::get('/status', [PostController::class, 'status'])->name('admin.content.post.status');
+                  
 
 
             });
