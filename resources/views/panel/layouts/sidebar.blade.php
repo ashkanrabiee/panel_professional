@@ -6,52 +6,55 @@
     <div class="side-nav__devider my-6"></div>
     <ul>
         <li>
-            <a href="index.html" class="side-menu ">
+            <a href="{{route("admin.home")}}" class="side-menu @if (Route::is('admin.home')
+            )
+                side-menu--active 
+            @endif">
                 <div class="side-menu__icon"> <i data-feather="home"></i> </div>
-                <div class="side-menu__title"> Dashboard </div>
+                <div class="side-menu__title"> داشبورد </div>
             </a>
         </li>
         <li>
             <a href="javascript:;" class="side-menu">
                 <div class="side-menu__icon"> <i data-feather="box"></i> </div>
-                <div class="side-menu__title"> Showcase <i data-feather="chevron-down" class="side-menu__sub-icon">
+                <div class="side-menu__title"> ویترین <i data-feather="chevron-down" class="side-menu__sub-icon">
                     </i> </div>
             </a>
             <ul class="">
                 <li>
                     <a href="index.html" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                        <div class="side-menu__title">Category</div>
+                        <div class="side-menu__title">دسته بندی</div>
                     </a>
                 </li>
                 <li>
                     <a href="index.html" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                        <div class="side-menu__title">Product form</div>
+                        <div class="side-menu__title"> فرم کالا</div>
                     </a>
                 </li>
                 <li>
                     <a href="simple-menu-dashboard.html" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                        <div class="side-menu__title"> Brands </div>
+                        <div class="side-menu__title"> برند ها </div>
                     </a>
                 </li>
                 <li>
                     <a href="top-menu-dashboard.html" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                        <div class="side-menu__title"> commodities </div>
+                        <div class="side-menu__title"> کالاها </div>
                     </a>
                 </li>
                 <li>
                     <a href="top-menu-dashboard.html" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                        <div class="side-menu__title"> Store </div>
+                        <div class="side-menu__title"> انبار </div>
                     </a>
                 </li>
                 <li>
                     <a href="top-menu-dashboard.html" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                        <div class="side-menu__title"> Comments </div>
+                        <div class="side-menu__title"> نظرات </div>
                     </a>
                 </li>
             </ul>
@@ -61,44 +64,44 @@
         <li>
             <a href="javascript:;" class="side-menu">
                 <div class="side-menu__icon"> <i data-feather="box"></i> </div>
-                <div class="side-menu__title"> Orders<i data-feather="chevron-down" class="side-menu__sub-icon">
+                <div class="side-menu__title"> سفارشات<i data-feather="chevron-down" class="side-menu__sub-icon">
                     </i> </div>
             </a>
             <ul class="">
                 <li>
                     <a href="index.html" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                        <div class="side-menu__title"> NewOrders</div>
+                        <div class="side-menu__title"> سفارش جدید</div>
                     </a>
                 </li>
                 <li>
                     <a href="simple-menu-dashboard.html" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                        <div class="side-menu__title"> Sending </div>
+                        <div class="side-menu__title"> درحال ارسال  </div>
                     </a>
                 </li>
                 <li>
                     <a href="top-menu-dashboard.html" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                        <div class="side-menu__title"> Unpaid</div>
+                        <div class="side-menu__title">  پرداخت نشده</div>
                     </a>
                 </li>
                 <li>
                     <a href="index.html" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                        <div class="side-menu__title"> Cancelled</div>
+                        <div class="side-menu__title"> باطل شده </div>
                     </a>
                 </li>
                 <li>
                     <a href="index.html" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                        <div class="side-menu__title"> Return</div>
+                        <div class="side-menu__title"> مرجوعی</div>
                     </a>
                 </li>
                 <li>
                     <a href="index.html" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                        <div class="side-menu__title"> All orders</div>
+                        <div class="side-menu__title"> تمام سفارشات</div>
                     </a>
                 </li>
             </ul>
@@ -109,32 +112,32 @@
         <li>
             <a href="javascript:;" class="side-menu">
                 <div class="side-menu__icon"> <i data-feather="box"></i> </div>
-                <div class="side-menu__title"> Payment <i data-feather="chevron-down" class="side-menu__sub-icon">
+                <div class="side-menu__title"> پرداخت ها <i data-feather="chevron-down" class="side-menu__sub-icon">
                     </i> </div>
             </a>
             <ul class="">
                 <li>
                     <a href="index.html" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                        <div class="side-menu__title"> All Payments </div>
+                        <div class="side-menu__title">  تمام پرداخت ها  </div>
                     </a>
                 </li>
                 <li>
                     <a href="simple-menu-dashboard.html" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                        <div class="side-menu__title"> Online Payments </div>
+                        <div class="side-menu__title">  پرداخت انلاین </div>
                     </a>
                 </li>
                 <li>
                     <a href="simple-menu-dashboard.html" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                        <div class="side-menu__title"> Offline Payments </div>
+                        <div class="side-menu__title">  پرداخت آفلاین </div>
                     </a>
                 </li>
                 <li>
                     <a href="simple-menu-dashboard.html" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                        <div class="side-menu__title"> Cash Payment  </div>
+                        <div class="side-menu__title"> پرداخت در محل </div>
                     </a>
                 </li>
               
@@ -146,34 +149,40 @@
         <li>
             <a href="javascript:;" class="side-menu">
                 <div class="side-menu__icon"> <i data-feather="box"></i> </div>
-                <div class="side-menu__title"> Discounts <i data-feather="chevron-down" class="side-menu__sub-icon">
+                <div class="side-menu__title"> نخفیف ها  <i data-feather="chevron-down" class="side-menu__sub-icon">
                     </i> </div>
             </a>
             <ul class="">
                 <li>
                     <a href="index.html" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                        <div class="side-menu__title"> Discount Coupon  </div>
+                        <div class="side-menu__title"> کد تخفیف  </div>
                     </a>
                 </li>
                 <li>
                     <a href="simple-menu-dashboard.html" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                        <div class="side-menu__title"> General Discount </div>
+                        <div class="side-menu__title"> کپن تخفیف </div>
                     </a>
                 </li>
                 <li>
                     <a href="top-menu-dashboard.html" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
-                        <div class="side-menu__title"> Amazing Sale </div>
+                        <div class="side-menu__title"> نخفیف عمومی  </div>
                     </a>
                 </li>
+                    <a href="top-menu-dashboard.html" class="side-menu">
+                        <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
+                        <div class="side-menu__title"> فروش شگفت انگیز </div>
+                    </a>
+                </li>
+
             </ul>
         </li>
-        <li>
+    <li>
             <a href="side-menu-file-manager.html" class="side-menu">
                 <div class="side-menu__icon"> <i data-feather="hard-drive"></i> </div>
-                <div class="side-menu__title"> Shipping methods </div>
+                <div class="side-menu__title"> روش ارسال</div>
             </a>
         </li>
         <li class="side-nav__devider my-6"></li>
