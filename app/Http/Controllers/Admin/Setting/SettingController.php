@@ -9,4 +9,9 @@ class SettingController extends Controller
     public function  index(){
         return view("panel.store.setting");
     }
+    public function  store(){
+        return response()->json(
+            ["message"=>"gived"]
+        );
+    }
 }

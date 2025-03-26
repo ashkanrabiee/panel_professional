@@ -273,10 +273,7 @@ Route::prefix('admin')->group(function(){
 
           Route::prefix('setting')->group(function(){
             Route::get('/',[SettingController::class , 'index'])->name('admin.setting.index');
-            Route::get('/create',[SettingController::class , 'create'])->name('admin.setting.create');
             Route::post('/store',[SettingController::class , 'store'])->name('admin.setting.store');
-            Route::get('/edit/{postCategory}',[SettingController::class , 'edit'])->name('admin.setting.edit');
-            Route::patch('/update/{postCategory}',[SettingController::class , 'update'])->name('admin.setting.update');
       });
 
 
