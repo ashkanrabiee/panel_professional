@@ -20,6 +20,15 @@
         </div> 
         @include('panel.layouts.script')           
         @yield('script')
+
+        <section class="toast-wrapper flex-row-reverse">
+            @include('panel.alerts.toast.success')
+            @include('panel.alerts.toast.error')
+        </section>
+
+        @include('panel.alerts.sweetalert.error')
+        @include('panel.alerts.sweetalert.success')
+
 </body>
 </html>
 

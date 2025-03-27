@@ -255,13 +255,12 @@ Route::prefix('admin')->group(function(){
             Route::get('/',[BannnerController::class , 'index'])->name('admin.content.banner.index');
             Route::get('/create',[BannnerController::class , 'create'])->name('admin.content.banner.create');
             Route::post('/store',[BannnerController::class , 'store'])->name('admin.content.banner.store');
-            Route::get('/edit',[BannnerController::class , 'edit'])->name('admin.content.banner.edit');
-            Route::patch('/update',[BannnerController::class , 'update'])->name('admin.content.banner.update');
-            Route::delete('/destroy',[BannnerController::class , 'edit'])->name('admin.content.banner.destroy');
-            Route::get('/status', [BannnerController::class, 'status'])->name('admin.content.banner.status');
+            Route::get('/edit/{banner}',[BannnerController::class , 'edit'])->name('admin.content.banner.edit');
+            Route::patch('/update/{banner}',[BannnerController::class , 'update'])->name('admin.content.banner.update');
+            Route::delete('/destroy/{banner}',[BannnerController::class , 'edit'])->name('admin.content.banner.destroy');
+            Route::get('/status/{banner}', [BannnerController::class, 'status'])->name('admin.content.banner.status');
       });
-
-
+     
 
       });
       //content section end 
