@@ -15,44 +15,60 @@
             </a>
         </li>
         <li>
-            <a href="javascript:;" class="side-menu">
+            <a href="javascript:;" class="side-menu @if (Route::is('admin.market.category.index') ||
+            Route::is('admin.market.product.index') ||
+            Route::is('admin.market.product.create') ||
+            Route::is('admin.market.brand.index') ||
+            Route::is('admin.market.store.index') ||
+            Route::is('admin.market.comment.index') 
+            )
+                side-menu--active side-menu--open
+            @endif">
                 <div class="side-menu__icon"> <i data-feather="box"></i> </div>
                 <div class="side-menu__title"> ویترین <i data-feather="chevron-down" class="side-menu__sub-icon">
                     </i> </div>
             </a>
-            <ul class="">
+            <ul @if (Route::is('admin.market.category.index') ||
+            Route::is('admin.market.product.index') ||
+            Route::is('admin.market.product.create') ||
+            Route::is('admin.market.brand.index') ||
+            Route::is('admin.market.store.index') ||
+            Route::is('admin.market.comment.index') 
+            )
+                class="side-menu__sub-open" style="display: block">
+            @endif
                 <li>
-                    <a href="index.html" class="side-menu">
+                    <a href="{{route("admin.market.category.index")}}" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
                         <div class="side-menu__title">دسته بندی</div>
                     </a>
                 </li>
                 <li>
-                    <a href="index.html" class="side-menu">
+                    <a href="{{route("admin.market.product.create")}}" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
                         <div class="side-menu__title"> فرم کالا</div>
                     </a>
                 </li>
                 <li>
-                    <a href="simple-menu-dashboard.html" class="side-menu">
+                    <a href="{{route('admin.market.brand.index')}}" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
                         <div class="side-menu__title"> برند ها </div>
                     </a>
                 </li>
                 <li>
-                    <a href="top-menu-dashboard.html" class="side-menu">
+                    <a href="{{route('admin.market.product.index')}}" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
                         <div class="side-menu__title"> کالاها </div>
                     </a>
                 </li>
                 <li>
-                    <a href="top-menu-dashboard.html" class="side-menu">
+                    <a href="{{route("admin.market.store.index")}}" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
                         <div class="side-menu__title"> انبار </div>
                     </a>
                 </li>
                 <li>
-                    <a href="top-menu-dashboard.html" class="side-menu">
+                    <a href="{{route("admin.market.comment.index")}}" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
                         <div class="side-menu__title"> نظرات </div>
                     </a>
@@ -210,7 +226,7 @@
             Route::is('admin.content.banner.index') 
             )
                 class="side-menu__sub-open" style="display: block">
-            @endif
+            @endif 
                             <li>
                     <a href="{{ route('admin.content.category.index') }}" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
