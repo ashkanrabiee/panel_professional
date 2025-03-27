@@ -54,7 +54,7 @@
                 <div class="mt-3">
                 <div>
                     <label>اسلاگ</label>
-                    <input type="text" name="name" class="input w-full border mt-2" placeholder="اسلاگ">
+                    <input type="text" name="slug" class="input w-full border mt-2" placeholder="اسلاگ">
                 </div>
                 </div>
                     <div class="mt-3">

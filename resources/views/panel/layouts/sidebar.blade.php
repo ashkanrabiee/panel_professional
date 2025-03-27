@@ -15,10 +15,13 @@
             </a>
         </li>
         <li>
-            <a href="javascript:;" class="side-menu @if (Route::is('admin.market.category.index') ||
+            <a href="javascript:;" class="side-menu @if (
+            Route::is('admin.market.category.index') ||
+            Route::is('admin.market.category.create') ||
             Route::is('admin.market.product.index') ||
             Route::is('admin.market.product.create') ||
             Route::is('admin.market.brand.index') ||
+            Route::is('admin.market.brand.create') ||
             Route::is('admin.market.store.index') ||
             Route::is('admin.market.comment.index') 
             )
@@ -28,7 +31,9 @@
                 <div class="side-menu__title"> ویترین <i data-feather="chevron-down" class="side-menu__sub-icon">
                     </i> </div>
             </a>
-            <ul @if (Route::is('admin.market.category.index') ||
+            <ul @if (
+            Route::is('admin.market.category.index') ||
+            Route::is('admin.market.category.create') ||
             Route::is('admin.market.product.index') ||
             Route::is('admin.market.product.create') ||
             Route::is('admin.market.brand.index') ||

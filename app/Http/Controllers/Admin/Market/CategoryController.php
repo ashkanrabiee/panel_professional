@@ -10,4 +10,7 @@ class CategoryController extends Controller
     public function index(){
         return view("panel.market.category.index");
     }
+    public function create(){
+        return view("panel.market.category.create");
+    }
 }
