@@ -17,10 +17,11 @@
             <!-- BEGIN: Form Layout -->
             <div class="intro-y box p-5">
                 <div>
-                    <label>Product Name</label>
+                    <label>عنوان بنر</label>
                     <input type="text" class="input w-full border mt-2" placeholder="Input text">
                 </div>
                 <div class="mt-3">
+                    
                     <label>Category</label>
                     <div class="mt-2">
                         <select data-placeholder="Select your favorite actors" class="select2 w-full" multiple>

@@ -9,7 +9,7 @@
 @section('content')
 <div class="grid grid-cols-12 gap-6 mt-5">
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-no-wrap items-center mt-2">
-        <button class="button text-white bg-theme-1 shadow-md mr-2"><a href="{{ route('admin.content.banner.edit') }}">ایجاد دسته بندی</a></button>
+        <button class="button text-white bg-theme-1 shadow-md mr-2"><a href="{{ route('admin.content.banner.create') }}">ایجاد دسته بندی</a></button>
         <div class="dropdown relative">
             <button class="dropdown-toggle button px-2 box text-gray-700">
                 <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4" data-feather="plus"></i> </span>
@@ -35,55 +35,50 @@
         <table class="table table-report -mt-2">
             <thead>
                 <tr>
-                    <th class="whitespace-no-wrap">IMAGES</th>
-                    <th class="whitespace-no-wrap">PRODUCT NAME</th>
-                    <th class="text-center whitespace-no-wrap">STOCK</th>
-                    <th class="text-center whitespace-no-wrap">STATUS</th>
-                    <th class="text-center whitespace-no-wrap">ACTIONS</th>
+                    <th class="whitespace-no-wrap">#</th>
+                    <th class="text-center whitespace-no-wrap">عنوان بنر</th>
+                    <th class="text-center whitespace-no-wrap">آدرس</th>
+                    <th class="text-center whitespace-no-wrap">تصویر</th>
+                    <th class="text-center whitespace-no-wrap">مکان</th>
+                    <th class="text-center whitespace-no-wrap">وضعیت</th>
+                    <th class="text-center whitespace-no-wrap">تنظیمات</th>
                 </tr>
             </thead>
             <tbody>
-             
-
-
-
+                @foreach ($banners as $banner)
                 <tr class="intro-x">
-                    <td class="w-40">
-                        <div class="flex">
-                            <div class="w-10 h-10 image-fit zoom-in">
-                                <img alt="Midone Tailwind HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-14.jpg" title="Uploaded at 5 August 2020">
-                            </div>
-                            <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                <img alt="Midone Tailwind HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-15.jpg" title="Uploaded at 5 August 2020">
-                            </div>
-                            <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                <img alt="Midone Tailwind HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-13.jpg" title="Uploaded at 5 August 2020">
-                            </div>
+                    <th>{{ $loop->iteration }}</th>
+                    <td class="text-center">{{ $banner->title }}</td>
+                    <td class="text-center">{{ $banner->url }}</td>
+                    <td class="text-center">
+                        <img src="{{ asset($banner->image) }}" alt="بنر" width="100" height="50">
+                    </td>
+                    <td class="text-center">{{ $positions[$banner->position] }}</td>
+                    <td class="text-center">
+                        <div class="mt-2">
+                            <input type="checkbox" class="input input--switch border">
                         </div>
-                    </td>
-                    <td>
-                        <a href="" class="font-medium whitespace-no-wrap">Dell XPS 13</a> 
-                        <div class="text-gray-600 text-xs whitespace-no-wrap">PC &amp; Laptop</div>
-                    </td>
-                    <td class="text-center">144</td>
-                    <td class="w-40">
-                        <div class="flex items-center justify-center text-theme-6"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Inactive </div>
                     </td>
                     <td class="table-report__action w-56">
                         <div class="flex justify-center items-center">
-                            <a class="flex items-center mr-3" href="{{ route('admin.content.banner.edit') }}"> <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                            <a class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
+                            <a class="flex items-center mr-3 btn btn-primary btn-sm" href="{{ route('admin.content.banner.edit', $banner->id) }}">
+                                <i data-feather="edit" class="w-4 h-4 mr-1"></i> ویرایش
+                            </a>
+                            <form class="d-inline" action="{{ route('admin.content.banner.destroy', $banner->id) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button class="flex items-center text-theme-6 btn btn-danger btn-sm delete" type="submit">
+                                    <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> حذف
+                                </button>
+                            </form>
                         </div>
                     </td>
                 </tr>
-
-
-
-
-
+                @endforeach
             </tbody>
         </table>
     </div>
+    
     <!-- END: Data List -->
     <!-- BEGIN: Pagination -->
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-no-wrap items-center">
@@ -117,4 +112,100 @@
 </div>
 
 
+@endsection
+
+@section('script')
+    
+
+<script type="text/javascript">
+
+    function changeStatus(id){
+        var element = $("#" + id)
+        var url = element.attr('data-url')
+        var elementValue = !element.prop('checked');
+
+        $.ajax({
+            url : url,
+            type : "GET",
+            success : function(response){
+                if(response.status){
+                    if(response.checked){
+                        element.prop('checked', true);
+                        successToast('بنر  با موفقیت فعال شد')
+                    }
+                    else{
+                        element.prop('checked', false);
+                        successToast('بنر  با موفقیت غیر فعال شد')
+                    }
+                }
+                else{
+                    element.prop('checked', elementValue);
+                    errorToast('هنگام ویرایش مشکلی بوجود امده است')
+                }
+            },
+            error : function(){
+                element.prop('checked', elementValue);
+                errorToast('ارتباط برقرار نشد')
+            }
+        });
+
+        function successToast(message){
+
+            var successToastTag = '<section class="toast" data-delay="5000">\n' +
+                '<section class="toast-body py-3 d-flex bg-success text-white">\n' +
+                    '<strong class="ml-auto">' + message + '</strong>\n' +
+                    '<button type="button" class="mr-2 close" data-dismiss="toast" aria-label="Close">\n' +
+                        '<span aria-hidden="true">&times;</span>\n' +
+                        '</button>\n' +
+                        '</section>\n' +
+                        '</section>';
+
+                        $('.toast-wrapper').append(successToastTag);
+                        $('.toast').toast('show').delay(5500).queue(function() {
+                            $(this).remove();
+                        })
+        }
+
+        function errorToast(message){
+
+            var errorToastTag = '<section class="toast" data-delay="5000">\n' +
+                '<section class="toast-body py-3 d-flex bg-danger text-white">\n' +
+                    '<strong class="ml-auto">' + message + '</strong>\n' +
+                    '<button type="button" class="mr-2 close" data-dismiss="toast" aria-label="Close">\n' +
+                        '<span aria-hidden="true">&times;</span>\n' +
+                        '</button>\n' +
+                        '</section>\n' +
+                        '</section>';
+
+                        $('.toast-wrapper').append(errorToastTag);
+                        $('.toast').toast('show').delay(5500).queue(function() {
+                            $(this).remove();
+                        })
+        }
+    }
+
+    $(document).on('click', '.delete', function (e) {
+    e.preventDefault();
+    var form = $(this).closest('form');
+    Swal.fire({
+        title: 'آیا مطمئن هستید؟',
+        text: "این عملیات قابل بازگشت نیست!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'بله، حذف کن!',
+        cancelButtonText: 'لغو'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            form.submit();
+        }
+    });
+});
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@include('panel.alerts.sweetalert.delete-confirm', ['className' => 'delete'])
 @endsection
