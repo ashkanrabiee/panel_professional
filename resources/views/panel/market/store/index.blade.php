@@ -1,19 +1,19 @@
 @extends('panel.layouts.master')
 
-@section('head-tag')
-    <title>پست ها </title>
-@endsection
-
-
 
 @section('content')
 <div class="grid grid-cols-12 gap-6 mt-5">
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-no-wrap items-center mt-2">
-        <button class="button text-white bg-theme-1 shadow-md mr-2"><a href="{{ route('admin.market.store.add-to-store') }}">ایجاد دسته بندی</a></button>
+        
+		@if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>موفق!</strong> {{ session('success') }}
+        
+    </div>
+@endif
+
         <div class="dropdown relative">
-            <button class="dropdown-toggle button px-2 box text-gray-700">
-                <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4" data-feather="plus"></i> </span>
-            </button>
+          
             <div class="dropdown-box mt-10 absolute w-40 top-0 left-0 z-20">
                 <div class="dropdown-box__content box p-2">
                     <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white hover:bg-gray-200 rounded-md"> <i data-feather="printer" class="w-4 h-4 mr-2"></i> Print </a>
@@ -71,7 +71,8 @@
                     </td>
                     <td class="table-report__action w-56">
                         <div class="flex justify-center items-center">
-                            <a class="flex items-center mr-3" href="{{ route('admin.content.post.edit') }}"> <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
+                            <a class="flex items-center mr-3" href="{{ route('admin.market.store.edit',[1]) }}"> <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
+                            <a class="flex items-center mr-3" href="{{ route('admin.market.store.create',[1]) }}"> <i data-feather="check-square" class="w-4 h-4 mr-1"></i> add count </a>
                             <a class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
                         </div>
                     </td>

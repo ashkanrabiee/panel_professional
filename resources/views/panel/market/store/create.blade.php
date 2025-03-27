@@ -2,7 +2,7 @@
 @section("content")
 <div class="intro-y flex items-center mt-8">
     <h2 class="text-lg font-medium mr-auto">
-        تنظیمات کلی سایت
+        اضافه کردن موجودی
     </h2>
 </div>
 <div class="flex justify-center items-center min-h-screen">
@@ -10,30 +10,24 @@
         <div class="intro-y col-span-12">
             <!-- BEGIN: Form Layout -->
             <div class="intro-y box p-5">
-                <form action="{{route("admin.setting.store")}}" method="post" enctype="multipart/form-data">
+                <form action="{{route("admin.market.store.store",[$product->id])}}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    
                 <div>
-                    <label>نام سایت</label>
-                    <input type="text" name="title" class="input w-full border mt-2" placeholder="نام سایت" required>
+                    <label>نام تحویل گیرنده</label>
+                    <input type="text" name="reciver" class="input w-full border mt-2" placeholder="نام تحویل گیرنده" value="" required>
                 </div>
                 <div>
-                    <label>کلمات کلیدی</label>
-                    <input type="text" name="keywords" class="input w-full border mt-2" placeholder="کلمات کلیدی" required>
+                    <label>نام تحویل دهنده</label>
+                    <input type="text" name="deliver" class="input w-full border mt-2" placeholder="نام تحویل دهنده" required>
                 </div>
                 <div class="mt-3">
-                    <label>توضیحات سایت</label>
+                    <label>تعداد</label>
                     <div class="mt-2">
-                        <textarea data-feature="basic" class="summernote" name="description" required></textarea>
+                        <input type="text" name="marketable_number" class="input w-full border mt-2" placeholder="تعداد" required>
                     </div>
                 </div>
-                <div>
-                    <label>لوگو سایت</label>
-                    <input type="file" name="logo" class="input w-full border mt-2" required>
-                </div>
-                <div>
-                    <label>آیکون سایت</label>
-                    <input type="file" name="icon" class="input w-full border mt-2" required>
-                </div>
+               
                 <div class="text-right mt-5">
                 
                     <button type="submit" class="button w-24 bg-theme-1 text-white">Save</button>
