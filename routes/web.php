@@ -17,15 +17,13 @@ use App\Http\Controllers\Admin\Setting\SettingController;
 
 
 
-Route::get('/', function () {
-   return view('welcome');
-});
 
+
+Route::get('/',[AdminDashboardController::class , 'index'])->name('admin.home');
 
 //admin
 Route::prefix('admin')->group(function(){
 
-      Route::get('/',[AdminDashboardController::class , 'index'])->name('admin.home');
       
 
                   //market section start 
