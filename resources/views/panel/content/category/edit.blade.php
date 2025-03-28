@@ -1,94 +1,89 @@
-@extends('panel.layouts.master')
-
-@section('head-tag')
-    <title>پست ها</title>
-@endsection
-
-
-@section('content')
+@extends("panel.layouts.master")
+@section("content")
+<style>
+    .custom-form {
+        background: #f8f9fa; /* رنگ پس‌زمینه صفحه */
+    }
+    
+    .form-container {
+        width: 100%;
+        background: #ffffff;
+    }
+    
+    .form-label {
+        margin-bottom: 5px;
+        color: #333;
+        display: block; /* تضمین می‌کنه لیبل به صورت بلوکی نمایش داده شود */
+    }
+    
+    .form-control {
+        border-radius: 8px; /* گوشه‌های گرد */
+        border: 1px solid #ccc;
+        padding: 10px;
+    }
+    </style>
+    
 <div class="intro-y flex items-center mt-8">
     <h2 class="text-lg font-medium mr-auto">
-        Form Layout
+        ویرایش دسته بندی
     </h2>
 </div>
 <div class="flex justify-center items-center min-h-screen">
     <div class="grid grid-cols-12 gap-6 w-full max-w-3xl">
         <div class="intro-y col-span-12">
             <!-- BEGIN: Form Layout -->
+       
             <div class="intro-y box p-5">
+                <form action="{{route("admin.content.category.update",$category->id)}}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    @method("PATCH")
                 <div>
-                    <label>Product Name</label>
-                    <input type="text" class="input w-full border mt-2" placeholder="Input text">
+                    <label>نام دسته بندی</label>
+                    <input type="text" name="name" class="input w-full border mt-2" placeholder="نام" value="{{$category->name}}" required>
                 </div>
                 <div class="mt-3">
-                    <label>Category</label>
+                    <label>توضیحات دسته بندی</label>
                     <div class="mt-2">
-                        <select data-placeholder="Select your favorite actors" class="select2 w-full" multiple>
-                            <option value="1" selected>Sport & Outdoor</option>
-                            <option value="2">PC & Laptop</option>
-                            <option value="3" selected>Smartphone & Tablet</option>
-                            <option value="4">Photography</option>
-                        </select>
+                        <textarea data-feature="basic" id="body" name="description" required>{{$category->description}}</textarea>
                     </div>
                 </div>
                 <div class="mt-3">
-                    <label>Quantity</label>
-                    <div class="relative mt-2">
-                        <input type="text" class="input pr-12 w-full border col-span-4" placeholder="Price">
-                        <div class="absolute top-0 right-0 rounded-r w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600">pcs</div>
-                    </div>
+                    <label>اسلاگ دسته بندی</label>
+                    <input type="text" name="slug" class="input w-full border mt-2" value="{{$category->slug}}" placeholder="اسلاگ" required>
+                </div>
+           
+                <div class="mt-3">
+                    <label>تصویر دسته بندی</label>
+                    <input type="file" name="image" class="input w-full border mt-2">
                 </div>
                 <div class="mt-3">
-                    <label>Weight</label>
-                    <div class="relative mt-2">
-                        <input type="text" class="input pr-16 w-full border col-span-4" placeholder="Price">
-                        <div class="absolute top-0 right-0 rounded-r w-16 h-full flex items-center justify-center bg-gray-100 border text-gray-600">grams</div>
-                    </div>
-                </div>
-                <div class="mt-3">
-                    <label>Price</label>
-                    <div class="sm:grid grid-cols-3 gap-2">
-                        <div class="relative mt-2">
-                            <div class="absolute top-0 left-0 rounded-l w-12 h-full flex items-center justify-center bg-gray-100 border text-gray-600">Unit</div>
-                            <div class="pl-3">
-                                <input type="text" class="input pl-12 w-full border col-span-4" placeholder="Price">
-                            </div>
-                        </div>
-                        <div class="relative mt-2">
-                            <div class="absolute top-0 left-0 rounded-l w-20 h-full flex items-center justify-center bg-gray-100 border text-gray-600">Wholesale</div>
-                            <div class="pl-3">
-                                <input type="text" class="input pl-20 w-full border col-span-4" placeholder="Price">
-                            </div>
-                        </div>
-                        <div class="relative mt-2">
-                            <div class="absolute top-0 left-0 rounded-l w-12 h-full flex items-center justify-center bg-gray-100 border text-gray-600">Bulk</div>
-                            <div class="pl-3">
-                                <input type="text" class="input pl-12 w-full border col-span-4" placeholder="Price">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-3">
-                    <label>Active Status</label>
                     <div class="mt-2">
-                        <input type="checkbox" class="input input--switch border">
+                        <label>وضعیت</label>
+                        <input type="hidden" name="status" value="0">
+                        <input type="checkbox" class="input input--switch border" name="status"  @if ($category->status == 1)
+                        checked
+                    @endif  value="1">
                     </div>
                 </div>
-                <div class="mt-3">
-                    <label>Textarea</label>
-                    <div class="mt-2">
-                        <textarea data-feature="basic" class="summernote" name="editor"></textarea>
-                    </div>
+           
+                <div class="mb-5 mt-3">
+                    <label>تگ ها</label>
+                    <input type="text" name="tags" class="input w-full border mt-2" placeholder="تگ ها" value="{{$category->tags}}" required>
                 </div>
+               
+                
                 <div class="text-right mt-5">
-                    <button type="button" class="button w-24 border text-gray-700 mr-1">Cancel</button>
-                    <button type="button" class="button w-24 bg-theme-1 text-white">Save</button>
+                
+                    <button type="submit" class="button w-24 bg-theme-1 text-white">Save</button>
                 </div>
             </div>
+        </form>
             <!-- END: Form Layout -->
         </div>
     </div>
 </div>
-
+    <script src="{{ asset('panel-asset/ckeditor/ckeditor.js') }}"></script>
+<script>
+    CKEDITOR.replace('body');
+</script>
 @endsection
-
