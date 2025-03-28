@@ -39,10 +39,10 @@ class BannnerController extends Controller
     }
 
 
-    public function edit()
+    public function edit(Banner $banner)
     {
-        // $positions = Banner::$positions ;
-        return view('panel.content.banner.edit');
+        $positions = Banner::$positions;
+        return view('panel.content.banner.edit', compact('banner', 'positions'));
     }
 
     public function destroy(Banner $banner)
@@ -53,6 +53,39 @@ class BannnerController extends Controller
             return redirect()->route('admin.content.banner.index')->with('swal-error', 'خطا در حذف بنر!');
         }
     }
+
+    public function update(BannerRequest $request , Banner $banner , ImageService $imageService)
+    {
+        $inputs = $request->all();
+
+        if($request->hasFile('image'))
+        {
+            if(!empty($banner->imaage))
+            {
+                $imageService->deleteImage($banner->image);
+            }
+            $imageService->setExclusiveDirectory('image' . DIRECTORY_SEPARATOR . 'banner');
+            $result = $imageService->save($request->file('image'));
+            if($result === false)
+            {
+                return redirect()->route('admin.content.banner.index')->with('swal-error', 'آپلود تصویر با خطا مواجه شد');
+            }
+            $inputs['image'] = $result;
+        }
+        else {
+            if (isset($inputs['currentImage']) && !empty($banner->image)) {
+                $image = $banner->image;
+                $image['currentImage'] = $inputs['currentImage'];
+                $inputs['image'] = $image;
+            }
+        }
+        $banner->update($inputs);
+        return redirect()->route('admin.content.banner.index')->with('swal-success', 'بنر  شما با موفقیت ویرایش شد');
+    }
+
+
+
+
     
     public function status(Banner $banner)
     {
