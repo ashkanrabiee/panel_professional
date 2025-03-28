@@ -239,19 +239,17 @@ Route::prefix('admin')->group(function(){
                   Route::get('/status', [MenuController::class, 'status'])->name('admin.content.menu.status');
       });
          //faq 
-         Route::prefix('faq')->group(function(){
-                
+            Route::prefix('faq')->group(function(){
             Route::get('/',[FaqController::class , 'index'])->name('admin.content.faq.index');
             Route::get('/create',[FaqController::class , 'create'])->name('admin.content.faq.create');
             Route::post('/store',[FaqController::class , 'store'])->name('admin.content.faq.store');
-            Route::get('/edit',[FaqController::class , 'edit'])->name('admin.content.faq.edit');
-            Route::patch('/update',[FaqController::class , 'update'])->name('admin.content.faq.update');
-            Route::delete('/destroy',[FaqController::class , 'edit'])->name('admin.content.faq.destroy');
-            Route::get('/status', [FaqController::class, 'status'])->name('admin.content.faq.status');
+            Route::get('/edit/{faq}',[FaqController::class , 'edit'])->name('admin.content.faq.edit');
+            Route::put('/update/{faq}', [FaqController::class, 'update'])->name('admin.content.faq.update');
+            Route::delete('/destroy/{faq}', [FaqController::class, 'destroy'])->name('admin.content.faq.destroy');
+            Route::get('/status/{faq}', [FaqController::class, 'status'])->name('admin.content.faq.status');
       });
         //banner 
-        Route::prefix('banner')->group(function(){
-                
+            Route::prefix('banner')->group(function(){  
             Route::get('/',[BannnerController::class , 'index'])->name('admin.content.banner.index');
             Route::get('/create',[BannnerController::class , 'create'])->name('admin.content.banner.create');
             Route::post('/store',[BannnerController::class , 'store'])->name('admin.content.banner.store');
