@@ -34,11 +34,9 @@ Route::prefix('admin')->group(function(){
                               Route::get('/' ,[MarketCategoryController::class , 'index'])->name('admin.market.category.index');
                               Route::get('/create' ,[MarketCategoryController::class , 'create'])->name('admin.market.category.create');
                               Route::post('/store' ,[MarketCategoryController::class , 'store'])->name('admin.market.category.store');
-                              Route::get('/show' ,[MarketCategoryController::class , 'show'])->name('admin.market.category.show');
-                              Route::get('/edit' ,[MarketCategoryController::class , 'edit'])->name('admin.market.category.edit');
-                              Route::put('/update' ,[MarketCategoryController::class , 'update'])->name('admin.market.category.update');
-                              Route::delete('/destroy' ,[MarketCategoryController::class , 'destroy'])->name('admin.market.category.destroy');
-                              Route::get('/status' ,[MarketCategoryController::class , 'status'])->name('admin.market.category.status');
+                              Route::get('/edit/{productCategory}' ,[MarketCategoryController::class , 'edit'])->name('admin.market.category.edit');
+                              Route::put('/update/{productCategory}' ,[MarketCategoryController::class , 'update'])->name('admin.market.category.update');
+                              Route::delete('/destroy/{productCategory}' ,[MarketCategoryController::class , 'destroy'])->name('admin.market.category.destroy');
                         });
 
                          //brand
