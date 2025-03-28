@@ -53,9 +53,19 @@ class CategoryController extends Controller
             return redirect()->route('admin.content.category.index')->with('swal-error', 'خطا در حذف بنر!');
         }
     }
-    public function update($category,Request $request){
-        
-        PostCategory::find($category)->update($request->all());
+    public function update($category,Request $request,ImageService $imageService){
+        $inputs = $request->all();
+        if($request->hasFile('image'))
+        {
+            $imageService->setExclusiveDirectory('image' . DIRECTORY_SEPARATOR . 'Posts');
+            $result = $imageService->save($request->file('image'));
+            if($result === false)
+            {
+                return redirect()->route('admin.content.post.index')->with('swal-error', 'آپلود تصویر با خطا مواجه شد');
+            }
+         $inputs['image']= $result;
+        }
+        PostCategory::find($category)->update($inputs);
         return to_route("admin.content.category.index");
     }
 

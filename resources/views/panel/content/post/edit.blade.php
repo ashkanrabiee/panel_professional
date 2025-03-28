@@ -1,14 +1,8 @@
-@extends('panel.layouts.master')
-
-@section('head-tag')
-    <title> پست ها</title>
-@endsection
-
-
-@section('content')
+@extends("panel.layouts.master")
+@section("content")
 <div class="intro-y flex items-center mt-8">
     <h2 class="text-lg font-medium mr-auto">
-        Form Layout
+        ساخت پست
     </h2>
 </div>
 <div class="flex justify-center items-center min-h-screen">
@@ -16,79 +10,87 @@
         <div class="intro-y col-span-12">
             <!-- BEGIN: Form Layout -->
             <div class="intro-y box p-5">
-                <div>
-                    <label>Product Name</label>
-                    <input type="text" class="input w-full border mt-2" placeholder="Input text">
-                </div>
-                <div class="mt-3">
-                    <label>Category</label>
-                    <div class="mt-2">
-                        <select data-placeholder="Select your favorite actors" class="select2 w-full" multiple>
-                            <option value="1" selected>Sport & Outdoor</option>
-                            <option value="2">PC & Laptop</option>
-                            <option value="3" selected>Smartphone & Tablet</option>
-                            <option value="4">Photography</option>
+                <form action="{{ route('admin.content.post.update',$post->id) }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    @method("PATCH")
+                    <div>
+                        <label>نام پست</label>
+                        <input type="text" name="title" class="input w-full border mt-2" value="{{$post->title}}" placeholder="نام پست" required>
+                    </div>
+                    <div>
+                        <label>اسلاگ</label>
+                        <input type="text" name="slug" class="input w-full border mt-2" value="{{$post->slug}}" placeholder="اسلاگ" required>
+                    </div>
+                    <div class="mt-3">
+                        <label>تگ‌ها</label>
+                        <input type="text" name="tags" id="tags-input" class="input w-full border mt-2" value="{{$post->tags}}" placeholder="تگ‌ها را وارد کنید و Enter بزنید">
+                        
+                        <div id="tags-container" class="mt-2 flex flex-wrap gap-2"></div>
+                    </div>
+                    <div class="mt-2"> 
+                        <label>دسته‌بندی</label>
+                        <select name="category_id" class="select2 w-full">
+                            <option>--- دسته‌بندی مورد نظر خود را انتخاب کنید ---</option>
+                            @foreach ($category as $cat)
+                            
+                            <option value="{{$cat->id}}"
+                                @if ($post->category_id == $cat->id)
+                                    selected
+                                @endif
+                                >{{$cat->name}}</option>
+                            @endforeach
                         </select>
                     </div>
-                </div>
-                <div class="mt-3">
-                    <label>Quantity</label>
-                    <div class="relative mt-2">
-                        <input type="text" class="input pr-12 w-full border col-span-4" placeholder="Price">
-                        <div class="absolute top-0 right-0 rounded-r w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600">pcs</div>
-                    </div>
-                </div>
-                <div class="mt-3">
-                    <label>Weight</label>
-                    <div class="relative mt-2">
-                        <input type="text" class="input pr-16 w-full border col-span-4" placeholder="Price">
-                        <div class="absolute top-0 right-0 rounded-r w-16 h-full flex items-center justify-center bg-gray-100 border text-gray-600">grams</div>
-                    </div>
-                </div>
-                <div class="mt-3">
-                    <label>Price</label>
-                    <div class="sm:grid grid-cols-3 gap-2">
-                        <div class="relative mt-2">
-                            <div class="absolute top-0 left-0 rounded-l w-12 h-full flex items-center justify-center bg-gray-100 border text-gray-600">Unit</div>
-                            <div class="pl-3">
-                                <input type="text" class="input pl-12 w-full border col-span-4" placeholder="Price">
-                            </div>
-                        </div>
-                        <div class="relative mt-2">
-                            <div class="absolute top-0 left-0 rounded-l w-20 h-full flex items-center justify-center bg-gray-100 border text-gray-600">Wholesale</div>
-                            <div class="pl-3">
-                                <input type="text" class="input pl-20 w-full border col-span-4" placeholder="Price">
-                            </div>
-                        </div>
-                        <div class="relative mt-2">
-                            <div class="absolute top-0 left-0 rounded-l w-12 h-full flex items-center justify-center bg-gray-100 border text-gray-600">Bulk</div>
-                            <div class="pl-3">
-                                <input type="text" class="input pl-12 w-full border col-span-4" placeholder="Price">
-                            </div>
+                    <div class="mt-3">
+                        <label>بدنه پست</label>
+                        <div class="mt-2">
+                            <textarea id="body" name="body" required>{{$post->body}}</textarea>
                         </div>
                     </div>
-                </div>
-                <div class="mt-3">
-                    <label>Active Status</label>
-                    <div class="mt-2">
-                        <input type="checkbox" class="input input--switch border">
+                    <div class="mt-3">
+                        <label>خلاصه</label>
+                        <div class="mt-2">
+                            <textarea id="summary" name="summary" required>{{$post->summary}}</textarea>
+                        </div>
                     </div>
-                </div>
-                <div class="mt-3">
-                    <label>Textarea</label>
-                    <div class="mt-2">
-                        <textarea data-feature="basic" class="summernote" name="editor"></textarea>
+                    <div>
+                        <label>تصویر پست</label>
+                        <input type="file" name="image" class="input w-full border mt-2">
                     </div>
-                </div>
-                <div class="text-right mt-5">
-                    <button type="button" class="button w-24 border text-gray-700 mr-1">Cancel</button>
-                    <button type="button" class="button w-24 bg-theme-1 text-white">Save</button>
-                </div>
+                    <div>
+                        <div class="mt-3">
+                            <label>وضعیت</label>
+                            <div class="mt-2">
+                                <input type="hidden" name="status" value="0">
+                                <input type="checkbox" name="status" class="input input--switch border" @if ($post->status == 1)
+                                    checked
+                                @endif value="1">
+                                
+                            </div>
+                        </div>
+                        <label>باز و بسته بودن کامنت</label>
+                        <div class="mt-2">
+                            <input type="hidden" name="commentable" value="0">
+                            <input type="checkbox" name="commentable" class="input input--switch border" @if ($post->commentable == 1)
+                            checked
+                        @endif value="1">
+                            
+                        </div>
+                    </div>
+                    <div class="text-right mt-5">
+                        <button type="submit" class="button w-24 bg-theme-1 text-white">ذخیره</button>
+                    </div>
+                </form>
             </div>
             <!-- END: Form Layout -->
         </div>
     </div>
 </div>
 
-@endsection
+<script src="{{ asset('panel-asset/ckeditor/ckeditor.js') }}"></script>
+<script>
+    CKEDITOR.replace('body');
+    CKEDITOR.replace('summary');
+</script>
 
+@endsection

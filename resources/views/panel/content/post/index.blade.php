@@ -9,7 +9,7 @@
 @section('content')
 <div class="grid grid-cols-12 gap-6 mt-5">
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-no-wrap items-center mt-2">
-        <button class="button text-white bg-theme-1 shadow-md mr-2"><a href="{{ route('admin.content.post.create') }}">ایجاد دسته بندی</a></button>
+        <button class="button text-white bg-theme-1 shadow-md mr-2"><a href="{{ route('admin.content.post.create') }}">ایجاد پست جدید</a></button>
         <div class="dropdown relative">
             <button class="dropdown-toggle button px-2 box text-gray-700">
                 <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4" data-feather="plus"></i> </span>
@@ -35,51 +35,65 @@
         <table class="table table-report -mt-2">
             <thead>
                 <tr>
-                    <th class="whitespace-no-wrap">IMAGES</th>
-                    <th class="whitespace-no-wrap">PRODUCT NAME</th>
-                    <th class="text-center whitespace-no-wrap">STOCK</th>
-                    <th class="text-center whitespace-no-wrap">STATUS</th>
+                    <th class="whitespace-no-wrap">نام</th>
+                    <th class="whitespace-no-wrap">تصویر</th>
+                    <th class="text-center whitespace-no-wrap">خلاصه</th>
+                    <th class="text-center whitespace-no-wrap">کامنت</th>
+                    <th class="text-center whitespace-no-wrap">وضعیت پست</th>
                     <th class="text-center whitespace-no-wrap">ACTIONS</th>
                 </tr>
             </thead>
             <tbody>
              
 
+@foreach ($post as $posti)
+    
 
 
                 <tr class="intro-x">
-                    <td class="w-40">
-                        <div class="flex">
-                            <div class="w-10 h-10 image-fit zoom-in">
-                                <img alt="Midone Tailwind HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-14.jpg" title="Uploaded at 5 August 2020">
-                            </div>
-                            <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                <img alt="Midone Tailwind HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-15.jpg" title="Uploaded at 5 August 2020">
-                            </div>
-                            <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                <img alt="Midone Tailwind HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-13.jpg" title="Uploaded at 5 August 2020">
-                            </div>
-                        </div>
-                    </td>
+           
                     <td>
-                        <a href="" class="font-medium whitespace-no-wrap">Dell XPS 13</a> 
-                        <div class="text-gray-600 text-xs whitespace-no-wrap">PC &amp; Laptop</div>
+                        <a href="" class="font-medium whitespace-no-wrap">{{$posti->title}}</a> 
+                        <div class="text-gray-600 text-xs whitespace-no-wrap">{{$posti->tags}}</div>
                     </td>
-                    <td class="text-center">144</td>
+                    <td class="text-center">
+                        <img src="{{ asset($posti->image) }}" alt="بنر" width="100" height="50">
+
+                    </td>
                     <td class="w-40">
-                        <div class="flex items-center justify-center text-theme-6"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Inactive </div>
+                        {{strip_tags($posti->summary)}}
+                    </td>
+                    <td class="text-center">
+                        @if ($posti->commentable == 0)
+                            بسته است
+                            @else
+                            باز است
+                        @endif
+                    </td>
+                    <td class="text-center">
+                        @if ($posti->status == 0)
+                            بسته است
+                            @else
+                            باز است
+                        @endif
                     </td>
                     <td class="table-report__action w-56">
                         <div class="flex justify-center items-center">
-                            <a class="flex items-center mr-3" href="{{ route('admin.content.post.edit') }}"> <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                            <a class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
+                            <a class="flex items-center mr-3" href="{{ route('admin.content.post.edit',$posti->id) }}"> <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
+                            <form class="d-inline" action="{{ route('admin.content.post.destroy', $posti->id) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button class="flex items-center text-theme-6 btn btn-danger btn-sm delete" type="submit">
+                                    <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> حذف
+                                </button>
+                            </form>
                         </div>
                     </td>
                 </tr>
 
 
 
-
+                @endforeach
 
             </tbody>
         </table>
