@@ -22,14 +22,29 @@
                     </div>
                     <div class="mt-3">
                         <label>تگ‌ها</label>
-                        <input type="text" id="tags-input" class="input w-full border mt-2" placeholder="تگ‌ها را وارد کنید و Enter بزنید">
-                        <input type="hidden" name="tags" id="tags-hidden">
+                        <input type="text" name="tags" id="tags-input" class="input w-full border mt-2" placeholder="تگ‌ها را وارد کنید و Enter بزنید">
+                        
                         <div id="tags-container" class="mt-2 flex flex-wrap gap-2"></div>
+                    </div>
+                    <div class="mt-2"> 
+                        <label>دسته‌بندی</label>
+                        <select name="category_id" class="select2 w-full">
+                            <option>--- دسته‌بندی مورد نظر خود را انتخاب کنید ---</option>
+                            @foreach ($category as $cat)
+                            <option value="{{$cat->id}}">{{$cat->name}}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="mt-3">
                         <label>بدنه پست</label>
                         <div class="mt-2">
                             <textarea id="body" name="body" required></textarea>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <label>خلاصه</label>
+                        <div class="mt-2">
+                            <textarea id="summary" name="summary" required></textarea>
                         </div>
                     </div>
                     <div>
@@ -40,19 +55,17 @@
                         <div class="mt-3">
                             <label>وضعیت</label>
                             <div class="mt-2">
-                                <input type="checkbox" class="input input--switch border" name="status">
+                                <input type="hidden" name="status" value="0">
+                                <input type="checkbox" class="input input--switch border" name="status" value="1">
+                                
                             </div>
                         </div>
                         <label>باز و بسته بودن کامنت</label>
                         <div class="mt-2">
-                            <input type="checkbox" class="input input--switch border" name="commentable">
+                            <input type="hidden" name="commentable" value="0">
+                            <input type="checkbox" class="input input--switch border" name="commentable" value="1">
+                            
                         </div>
-                    </div>
-                    <div class="mt-2"> 
-                        <label>دسته‌بندی</label>
-                        <select name="category_id" class="select2 w-full">
-                            <option value="1">--- دسته‌بندی مورد نظر خود را انتخاب کنید ---</option>
-                        </select>
                     </div>
                     <div class="text-right mt-5">
                         <button type="submit" class="button w-24 bg-theme-1 text-white">ذخیره</button>
@@ -67,40 +80,7 @@
 <script src="{{ asset('panel-asset/ckeditor/ckeditor.js') }}"></script>
 <script>
     CKEDITOR.replace('body');
-
-    document.addEventListener("DOMContentLoaded", function () {
-        let tagsInput = document.getElementById("tags-input");
-        let tagsContainer = document.getElementById("tags-container");
-        let tagsHidden = document.getElementById("tags-hidden");
-        let tagsArray = [];
-
-        tagsInput.addEventListener("keypress", function (event) {
-            if (event.key === "Enter") {
-                event.preventDefault();
-                let tag = tagsInput.value.trim();
-                if (tag !== "" && !tagsArray.includes(tag)) {
-                    tagsArray.push(tag);
-                    updateTagsUI();
-                    tagsInput.value = "";
-                }
-            }
-        });
-
-        function updateTagsUI() {
-            tagsContainer.innerHTML = "";
-            tagsArray.forEach(tag => {
-                let tagElement = document.createElement("span");
-                tagElement.classList.add("bg-blue-500", "text-white", "px-2", "py-1", "rounded");
-                tagElement.textContent = tag;
-                tagElement.addEventListener("click", function () {
-                    tagsArray = tagsArray.filter(t => t !== tag);
-                    updateTagsUI();
-                });
-                tagsContainer.appendChild(tagElement);
-            });
-            tagsHidden.value = JSON.stringify(tagsArray);
-        }
-    });
+    CKEDITOR.replace('summary');
 </script>
 
 @endsection
