@@ -2,6 +2,25 @@
 
 @section('head-tag')
     <title>بنر ها</title>
+    
+    <style>
+        /* رنگ پیش‌فرض قرمز (غیرفعال) */
+        .form-check-input {
+            background-color: red !important;
+            border-color: red !important;
+        }
+
+        /* تغییر رنگ به آبی وقتی فعال شود */
+        .form-check-input:checked {
+            background-color: blue !important;
+            border-color: blue !important;
+        }
+
+        /* جلوگیری از تغییر رنگ دایره داخلی */
+        .form-check-input::before {
+            background-color: white !important;
+        }
+    </style>
 @endsection
 
 
@@ -56,7 +75,10 @@
                     <td class="text-center">{{ $positions[$banner->position] }}</td>
                     <td class="text-center">
                         <div class="mt-2">
-                            <input type="checkbox" class="input input--switch border">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="customSwitch" data-bs-toggle="alert">
+                                <label class="form-check-label" for="customSwitch"></label>
+                            </div>
                         </div>
                     </td>
                     <td class="table-report__action w-56">
@@ -204,7 +226,19 @@
 });
 
 </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let switchInput = document.getElementById("customSwitch");
 
+        switchInput.addEventListener("change", function () {
+            Swal.fire({
+                icon: this.checked ? "success" : "error",
+                title: this.checked ? "وضعیت: فعال شد ✅" : "وضعیت: غیرفعال شد ❌",
+                confirmButtonText: "باشه"
+            });
+        });
+    });
+</script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 @include('panel.alerts.sweetalert.delete-confirm', ['className' => 'delete'])

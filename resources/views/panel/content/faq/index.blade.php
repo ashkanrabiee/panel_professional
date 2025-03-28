@@ -9,7 +9,7 @@
 @section('content')
 <div class="grid grid-cols-12 gap-6 mt-5">
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-no-wrap items-center mt-2">
-        <button class="button text-white bg-theme-1 shadow-md mr-2"><a href="{{ route('admin.content.faq.index') }}">ایجاد دسته بندی</a></button>
+        <button class="button text-white bg-theme-1 shadow-md mr-2"><a href="{{ route('admin.content.faq.create') }}">ایجاد دسته بندی</a></button>
         <div class="dropdown relative">
             <button class="dropdown-toggle button px-2 box text-gray-700">
                 <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4" data-feather="plus"></i> </span>
@@ -32,58 +32,56 @@
     </div>
     <!-- BEGIN: Data List -->
     <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
-        <table class="table table-report -mt-2">
-            <thead>
-                <tr>
-                    <th class="whitespace-no-wrap">IMAGES</th>
-                    <th class="whitespace-no-wrap">PRODUCT NAME</th>
-                    <th class="text-center whitespace-no-wrap">STOCK</th>
-                    <th class="text-center whitespace-no-wrap">STATUS</th>
-                    <th class="text-center whitespace-no-wrap">ACTIONS</th>
+        <table class="table table-report w-full border-collapse border border-gray-300">
+            <thead class="bg-gray-100">
+                <tr class="text-gray-700">
+                    <th class="p-3 border border-gray-300 text-center">#</th>
+                    <th class="p-3 border border-gray-300 text-right">پرسش</th>
+                    <th class="p-3 border border-gray-300 text-center">خلاصه پاسخ</th>
+                    <th class="p-3 border border-gray-300 text-center">وضعیت</th>
+                    <th class="p-3 border border-gray-300 text-center">تنظیمات</th>
                 </tr>
             </thead>
             <tbody>
-             
-
-
-
-                <tr class="intro-x">
-                    <td class="w-40">
-                        <div class="flex">
-                            <div class="w-10 h-10 image-fit zoom-in">
-                                <img alt="Midone Tailwind HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-14.jpg" title="Uploaded at 5 August 2020">
+                @foreach ($faqs as $faq)
+                    <tr class="intro-x border border-gray-300 hover:bg-gray-50 transition">
+                        <td class="p-3 border border-gray-300 text-center">{{ $loop->iteration }}</td>
+                        <td class="p-3 border border-gray-300 text-right">
+                            <bdi>{{ $faq->question }}</bdi>
+                        </td>
+                        
+                        <td class="p-3 border border-gray-300 text-center">{{ Str::limit(strip_tags($faq->answer), 50) }}</td>
+                        <td class="p-3 border border-gray-300 text-center">
+                            <label class="flex items-center justify-center">
+                                <input id="{{ $faq->id }}" onchange="changeStatus({{ $faq->id }})" 
+                                    data-url="{{ route('admin.content.faq.status', $faq->id) }}" 
+                                    type="checkbox" class="form-checkbox h-5 w-5 text-blue-600" 
+                                    @if ($faq->status === 1) checked @endif>
+                            </label>
+                        </td>
+                        <td class="p-3 border border-gray-300 text-center">
+                            <div class="flex justify-center items-center space-x-3">
+                                <a class="flex items-center text-blue-600 hover:text-blue-800 transition" 
+                                   href="{{ route('admin.content.faq.edit', $faq->id) }}">
+                                    <i data-feather="edit" class="w-4 h-4 mr-1"></i> ویرایش
+                                </a>
+                                <form class="d-inline" action="{{ route('admin.content.faq.destroy', $faq->id) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="flex items-center text-red-600 hover:text-red-800 transition" type="submit">
+                                        <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> حذف
+                                    </button>
+                                </form>
                             </div>
-                            <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                <img alt="Midone Tailwind HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-15.jpg" title="Uploaded at 5 August 2020">
-                            </div>
-                            <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                <img alt="Midone Tailwind HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-13.jpg" title="Uploaded at 5 August 2020">
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <a href="" class="font-medium whitespace-no-wrap">Dell XPS 13</a> 
-                        <div class="text-gray-600 text-xs whitespace-no-wrap">PC &amp; Laptop</div>
-                    </td>
-                    <td class="text-center">144</td>
-                    <td class="w-40">
-                        <div class="flex items-center justify-center text-theme-6"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Inactive </div>
-                    </td>
-                    <td class="table-report__action w-56">
-                        <div class="flex justify-center items-center">
-                            <a class="flex items-center mr-3" href="{{ route('admin.content.faq.edit') }}"> <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                            <a class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
-                        </div>
-                    </td>
-                </tr>
-
-
-
-
-
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
+    
+
+
     <!-- END: Data List -->
     <!-- BEGIN: Pagination -->
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-no-wrap items-center">

@@ -8,7 +8,7 @@
 @section('content')
 <div class="intro-y flex items-center mt-8">
     <h2 class="text-lg font-medium mr-auto">
-        Form Layout
+        ویرایش بنر
     </h2>
 </div>
 <div class="flex justify-center items-center min-h-screen">
@@ -16,75 +16,69 @@
         <div class="intro-y col-span-12">
             <!-- BEGIN: Form Layout -->
             <div class="intro-y box p-5">
-                <div>
-                    <label>عنوان بنر</label>
-                    <input type="text" class="input w-full border mt-2" placeholder="Input text">
-                </div>
-                <div class="mt-3">
+                <form action="{{ route('admin.content.banner.update',$banner->id) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium">عنوان بنر</label>
+                        <input type="text" name="title" value="{{ old('title', $banner->title) }}" class="input w-full border mt-2 p-2" placeholder="عنوان بنر را وارد کنید">
+                        @error('title')
+                        <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
+                            <strong>
+                                {{ $message }}
+                            </strong>
+                        </span>
+                    @enderror
+                    </div>
                     
-                    <label>Category</label>
-                    <div class="mt-2">
-                        <select data-placeholder="Select your favorite actors" class="select2 w-full" multiple>
-                            <option value="1" selected>Sport & Outdoor</option>
-                            <option value="2">PC & Laptop</option>
-                            <option value="3" selected>Smartphone & Tablet</option>
-                            <option value="4">Photography</option>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium">تصویر</label>
+                        <input type="file" name="image" class="input w-full border mt-2 p-2" required>
+                        @error('image')
+                        <span class="alert_required bg-danger text-white p-1 rounded" role="alert">
+                            <strong>
+                                {{ $message }}
+                            </strong>
+                        </span>
+                    @enderror
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium">وضعیت</label>
+                        <select name="status" class="w-full border mt-2 p-2">
+                            <option value="0" {{ old('status') == 0 ? 'selected' : '' }}>غیرفعال</option>
+                            <option value="1" {{ old('status') == 1 ? 'selected' : '' }}>فعال</option>
                         </select>
+                        @error('status')
+                            <span class="text-red-600 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
-                </div>
-                <div class="mt-3">
-                    <label>Quantity</label>
-                    <div class="relative mt-2">
-                        <input type="text" class="input pr-12 w-full border col-span-4" placeholder="Price">
-                        <div class="absolute top-0 right-0 rounded-r w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600">pcs</div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium">آدرس URL</label>
+                        <input type="text" name="url" value="{{ old('url', $banner->url) }}" class="w-full border mt-2 p-2">
+                        @error('url')
+                            <span class="text-red-600 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
-                </div>
-                <div class="mt-3">
-                    <label>Weight</label>
-                    <div class="relative mt-2">
-                        <input type="text" class="input pr-16 w-full border col-span-4" placeholder="Price">
-                        <div class="absolute top-0 right-0 rounded-r w-16 h-full flex items-center justify-center bg-gray-100 border text-gray-600">grams</div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium">موقعیت</label>
+                        <select name="position" class="w-full border mt-2 p-2">
+                            @foreach ($positions as $key => $value)
+                                <option value="{{ $key }}" {{ old('position') == $key ? 'selected' : '' }}>{{ $value }}</option>
+                            @endforeach
+                        </select>
+                        @error('position')
+                            <span class="text-red-600 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
-                </div>
-                <div class="mt-3">
-                    <label>Price</label>
-                    <div class="sm:grid grid-cols-3 gap-2">
-                        <div class="relative mt-2">
-                            <div class="absolute top-0 left-0 rounded-l w-12 h-full flex items-center justify-center bg-gray-100 border text-gray-600">Unit</div>
-                            <div class="pl-3">
-                                <input type="text" class="input pl-12 w-full border col-span-4" placeholder="Price">
-                            </div>
-                        </div>
-                        <div class="relative mt-2">
-                            <div class="absolute top-0 left-0 rounded-l w-20 h-full flex items-center justify-center bg-gray-100 border text-gray-600">Wholesale</div>
-                            <div class="pl-3">
-                                <input type="text" class="input pl-20 w-full border col-span-4" placeholder="Price">
-                            </div>
-                        </div>
-                        <div class="relative mt-2">
-                            <div class="absolute top-0 left-0 rounded-l w-12 h-full flex items-center justify-center bg-gray-100 border text-gray-600">Bulk</div>
-                            <div class="pl-3">
-                                <input type="text" class="input pl-12 w-full border col-span-4" placeholder="Price">
-                            </div>
-                        </div>
+                    
+                    <div class="flex justify-end mt-5 space-x-3">
+                        <button type="reset" class="button w-24 border text-gray-700">لغو</button>
+                        <button type="submit" class="button w-24 bg-blue-600 text-white">ذخیره</button>
                     </div>
-                </div>
-                <div class="mt-3">
-                    <label>Active Status</label>
-                    <div class="mt-2">
-                        <input type="checkbox" class="input input--switch border">
-                    </div>
-                </div>
-                <div class="mt-3">
-                    <label>Textarea</label>
-                    <div class="mt-2">
-                        <textarea data-feature="basic" class="summernote" name="editor"></textarea>
-                    </div>
-                </div>
-                <div class="text-right mt-5">
-                    <button type="button" class="button w-24 border text-gray-700 mr-1">Cancel</button>
-                    <button type="button" class="button w-24 bg-theme-1 text-white">Save</button>
-                </div>
+                </form>
             </div>
             <!-- END: Form Layout -->
         </div>

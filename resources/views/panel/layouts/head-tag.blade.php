@@ -8,4 +8,6 @@
 <title>Dashboard - main</title>
 <!-- BEGIN: CSS Assets-->
 <link rel="stylesheet" href="{{ asset('panel-asset/css/app.css') }}" />
+<link rel="stylesheet" href="{{ asset('panel-asset/select2/css/select2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('panel-asset/sweetalert/sweetalert2.css') }}">
 <!-- END: CSS Assets-->
