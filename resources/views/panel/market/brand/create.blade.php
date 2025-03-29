@@ -5,52 +5,83 @@
         ساخت برندها
     </h2>
 </div>
-<div class="flex justify-center items-center min-h-screen">
-    <div class="grid grid-cols-12 gap-6 w-full max-w-3xl">
-        <div class="intro-y col-span-12">
-            <!-- BEGIN: Form Layout -->
-            <div class="intro-y box p-5">
-                <form action="{{route("admin.setting.store")}}" method="post" enctype="multipart/form-data">
-                    @csrf
-                <div>
-                    <label>نام فارسی</label>
-                    <input type="text" name="persian_name" class="input w-full border mt-2" placeholder="نام فارسی" required>
-                </div>
-                <div>
-                    <label>نام اصلی</label>
-                    <input type="text" name="original_name" class="input w-full border mt-2" placeholder="نام اصلی" required>
-                </div>
-                <div class="mt-3">
-                    <div>
-                        <label>اسلاگ</label>
-                        <input type="text" name="slug" class="input w-full border mt-2" placeholder="اسلاگ">
-                    </div>
-                    </div>
-                <div>
-                    <label>لوگو سایت</label>
-                    <input type="file" name="logo" class="input w-full border mt-2" required>
-                </div>
-                <div class="mt-3">
-                    <label>وضعیت</label>
-                    <div class="mt-2">
-                        <input type="checkbox" class="input input--switch border" name="status">
-                    </div>
-                </div>
-                <div class="mt-3">
-                    <label>تگ ها</label>
-                    <div class="mt-2">
-                        <input type="text" name="tags" class="input w-full border mt-2" placeholder="تگ ها">
-                    </div>
-                </div>
-                <div class="text-right mt-5">
-                
-                    <button type="submit" class="button w-24 bg-theme-1 text-white">Save</button>
-                </div>
+<div class="flex justify-center items-center min-h-screen p-6 bg-gray-100">
+    <div class="w-full max-w-3xl bg-white shadow-md rounded-lg p-6">
+        <!-- BEGIN: Form Layout -->
+        <form id="form" action="{{ route('admin.market.brand.store') }}" method="post" enctype="multipart/form-data">
+            @csrf
+            <div class="mb-4">
+                <label class="block font-medium text-gray-700">نام اصلی برند</label>
+                <input type="text" name="original_name" value="{{ old('original_name') }}" class="w-full p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-200" required>
+            </div>
+
+            <div class="mb-4">
+                <label class="block font-medium text-gray-700">نام فارسی برند</label>
+                <input type="text" name="persian_name" value="{{ old('persian_name') }}" class="w-full p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-200" required>
+            </div>
+
+            <div class="mb-4">
+                <label class="block font-medium text-gray-700">تگ‌ها</label>
+                <select name="tags[]" id="select_tags" class="w-full p-2 border border-gray-300 rounded-md" multiple></select>
+                <input type="hidden" id="tags" name="tags" value="{{ old('tags') }}">
+            </div>
+
+            <div class="mb-4">
+                <label class="block font-medium text-gray-700">وضعیت</label>
+                <select name="status" id="status" class="w-full p-2 border border-gray-300 rounded-md">
+                    <option value="0" @if(old('status') == 0) selected @endif>غیرفعال</option>
+                    <option value="1" @if(old('status') == 1) selected @endif>فعال</option>
+                </select>
+                @error('status')
+                <span class="text-red-600 text-sm">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="mb-4">
+                <label class="block font-medium text-gray-700">تصویر دسته‌بندی</label>
+                <input type="file" name="logo" id="logo" class="w-full p-2 border border-gray-300 rounded-md" required>
+            </div>
+
+            <div class="text-right mt-5">
+                <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">ذخیره</button>
             </div>
         </form>
-            <!-- END: Form Layout -->
-        </div>
+        <!-- END: Form Layout -->
     </div>
 </div>
 
+@endsection
+@section('script')
+    <script src="{{ asset('panel-asset/ckeditor/ckeditor.js') }}"></script>
+    <script>
+        CKEDITOR.replace('description');
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            var tags_input = $('#tags');
+            var select_tags = $('#select_tags');
+            var default_tags = tags_input.val();
+            var default_data = [];
+
+            if (default_tags.length > 0) {
+                default_data = default_tags.split(',');
+            }
+
+            select_tags.select2({
+                placeholder: 'لطفا تگ‌های خود را وارد نمایید',
+                tags: true,
+                data: default_data
+            });
+
+            select_tags.val(default_data).trigger('change');
+
+            $('#form').submit(function () {
+                var selectedTags = select_tags.val();
+                if (selectedTags) {
+                    tags_input.val(selectedTags.join(','));
+                }
+            });
+        });
+    </script>
 @endsection

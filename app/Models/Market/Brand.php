@@ -7,18 +7,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Product extends Model
+class Brand extends Model
 {
-    use HasFactory, SoftDeletes, Sluggable;
+    use HasFactory , SoftDeletes , Sluggable;
+
     public function sluggable(): array
     {
         return [
             'slug' => [
-                'source' => 'name'
+                'source' => 'original_name'
             ]
+
         ];
     }
-    protected $casts = ["image"=>"array"];
-    protected $guarded = [];
-}
 
+    protected $casts = ['logo' => 'array'];
+
+    protected $fillable = ['persian_name', 'original_name', 'slug', 'logo', 'status', 'tags'];
+
+}
