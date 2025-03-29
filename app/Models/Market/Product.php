@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Models\Market;
 
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -22,3 +21,4 @@ class Product extends Model
     protected $casts = ["image"=>"array"];
     protected $guarded = [];
 }
+
