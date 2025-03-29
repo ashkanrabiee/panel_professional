@@ -1,10 +1,9 @@
 <?php
-
-namespace App\Models\Setting;
+namespace App\Models\Market;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Setting extends Model
+class Order extends Model
 {
     protected $guarded = [];
 }
