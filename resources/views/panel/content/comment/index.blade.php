@@ -9,11 +9,8 @@
 @section('content')
 <div class="grid grid-cols-12 gap-6 mt-5">
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-no-wrap items-center mt-2">
-        <button class="button text-white bg-theme-1 shadow-md mr-2"><a href="{{ route('admin.content.comment.create') }}">ایجاد دسته بندی</a></button>
+       
         <div class="dropdown relative">
-            <button class="dropdown-toggle button px-2 box text-gray-700">
-                <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4" data-feather="plus"></i> </span>
-            </button>
             <div class="dropdown-box mt-10 absolute w-40 top-0 left-0 z-20">
                 <div class="dropdown-box__content box p-2">
                     <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white hover:bg-gray-200 rounded-md"> <i data-feather="printer" class="w-4 h-4 mr-2"></i> Print </a>
@@ -35,10 +32,10 @@
         <table class="table table-report -mt-2">
             <thead>
                 <tr>
-                    <th class="whitespace-no-wrap">IMAGES</th>
-                    <th class="whitespace-no-wrap">PRODUCT NAME</th>
-                    <th class="text-center whitespace-no-wrap">STOCK</th>
-                    <th class="text-center whitespace-no-wrap">STATUS</th>
+                    <th class="whitespace-no-wrap">نام کاربر</th>
+                    <th class="whitespace-no-wrap">نظر کاربر</th>
+                    <th class="text-center whitespace-no-wrap">پاسخ</th>
+                    <th class="text-center whitespace-no-wrap">نام پست</th>
                     <th class="text-center whitespace-no-wrap">ACTIONS</th>
                 </tr>
             </thead>
@@ -49,17 +46,7 @@
 
                 <tr class="intro-x">
                     <td class="w-40">
-                        <div class="flex">
-                            <div class="w-10 h-10 image-fit zoom-in">
-                                <img alt="Midone Tailwind HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-14.jpg" title="Uploaded at 5 August 2020">
-                            </div>
-                            <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                <img alt="Midone Tailwind HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-15.jpg" title="Uploaded at 5 August 2020">
-                            </div>
-                            <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                <img alt="Midone Tailwind HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-13.jpg" title="Uploaded at 5 August 2020">
-                            </div>
-                        </div>
+                    {{}}
                     </td>
                     <td>
                         <a href="" class="font-medium whitespace-no-wrap">Dell XPS 13</a> 

@@ -16,6 +16,7 @@ class ImageService extends ImageToolsService
         //execute provider
         $this->provider();
         //save image
+        
         $result = Image::make($image->getRealPath())->save(public_path($this->getImageAddress()), null, $this->getImageFormat());
         return $result ? $this->getImageAddress() : false;
     }

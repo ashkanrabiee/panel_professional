@@ -14,26 +14,33 @@
                     @csrf
                 <div>
                     <label>نام سایت</label>
-                    <input type="text" name="title" class="input w-full border mt-2" placeholder="نام سایت" required>
+                    <input type="text" name="title" class="input w-full border mt-2" value="{{$setting->title}}" placeholder="نام سایت" >
                 </div>
                 <div>
                     <label>کلمات کلیدی</label>
-                    <input type="text" name="keywords" class="input w-full border mt-2" placeholder="کلمات کلیدی" required>
+                    <input type="text" name="keywords" class="input w-full border mt-2" value="{{$setting->keywords}}" placeholder="کلمات کلیدی" >
                 </div>
-                <div class="mt-3">
-                    <label>توضیحات سایت</label>
-                    <div class="mt-2">
-                        <textarea data-feature="basic" class="summernote" name="description" required></textarea>
+                     <div class="mt-3">
+                        <label>خلاصه</label>
+                        <div class="mt-2">
+                            <textarea id="description" name="description" required></textarea>
+                        </div>
                     </div>
-                </div>
+<hr class="mt-8 mb-5">
+
                 <div>
                     <label>لوگو سایت</label>
-                    <input type="file" name="logo" class="input w-full border mt-2" required>
+                    <img src="{{asset($setting->logo)}}" width="200" alt="">
+                    <input type="file" name="logo" class="input w-full border mt-2" >
                 </div>
+<hr class="mt-8 mb-5">
                 <div>
                     <label>آیکون سایت</label>
-                    <input type="file" name="icon" class="input w-full border mt-2" required>
+                    <img src="{{asset($setting->icon)}}" width="200" alt="">
+
+                    <input type="file" name="icon" class="input w-full border mt-2" >
                 </div>
+
                 <div class="text-right mt-5">
                 
                     <button type="submit" class="button w-24 bg-theme-1 text-white">Save</button>
@@ -45,4 +52,9 @@
     </div>
 </div>
 
+<script src="{{ asset('panel-asset/ckeditor/ckeditor.js') }}"></script>
+<script>
+    CKEDITOR.replace('description');
+    
+</script>
 @endsection

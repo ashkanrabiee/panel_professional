@@ -9,11 +9,8 @@ class CommentController extends Controller
 {
     public function index()
     {
+        
         return view('panel.content.comment.index');
-    }
-    public function create()
-    {
-        return view('panel.content.comment.create');
     }
     public function edit(){
 

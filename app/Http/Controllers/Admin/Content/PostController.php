@@ -26,7 +26,7 @@ class PostController extends Controller
     public function store(Request $request,ImageService $imageService)
     {
         
-        $inputs = $request->all();
+        
         if($request->hasFile('image'))
         {
             $imageService->setExclusiveDirectory('image' . DIRECTORY_SEPARATOR . 'Posts');
