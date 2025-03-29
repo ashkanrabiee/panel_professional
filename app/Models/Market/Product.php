@@ -1,15 +1,4 @@
 <?php
-<<<<<<< HEAD
-
-namespace App\Models\Market;
-
-use Illuminate\Database\Eloquent\Model;
-
-class Product extends Model
-{
-    //
-}
-=======
 namespace App\Models\Market;
 
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -31,4 +20,4 @@ class Product extends Model
     protected $casts = ["image"=>"array"];
     protected $guarded = [];
 }
->>>>>>> main
+
