@@ -2,32 +2,36 @@
 @section("content")
 <div class="intro-y flex items-center mt-8">
     <h2 class="text-lg font-medium mr-auto">
-       ساخت فرم کالا
+        ایجاد  مقدار فرم کالا
     </h2>
 </div>
 <div class="flex justify-center items-center min-h-screen p-6 bg-gray-100">
     <div class="w-full max-w-3xl bg-white shadow-md rounded-lg p-6">
         <!-- BEGIN: Form Layout -->
-        <form  action="{{ route('admin.market.property.update',$categoryAttribute->id ) }}" method="POST" enctype="multipart/form-data" id="form">
+        <form action="{{ route('admin.market.value.store', $categoryAttribute->id) }}" method="POST">
             @csrf
-            @method('PUT')
+           
+         
+            
+            
+
+
             <div class="mb-4">
-                <label class="block font-medium text-gray-700">نام فرم</label>
-                <input type="text" name="name" value="{{ old('name', $categoryAttribute->name) }}" class="w-full p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-200" required>
+                <label class="block font-medium text-gray-700">مقدار</label>
+                <input type="text"  name="value" value="{{ old('value') }}" class="w-full p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-200" required>
             </div>
 
             <div class="mb-4">
-                <label class="block font-medium text-gray-700">واحد اندازه گیری</label>
-                <input type="text"  name="unit" value="{{ old('unit', $categoryAttribute->unit) }}" class="w-full p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-200" required>
+                <label class="block font-medium text-gray-700">افزایش قیمت</label>
+                <input type="text"  name="price_increase" value="{{ old('price_increase') }}" class="w-full p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-200" required>
             </div>
 
+
             <div class="mb-4">
-                <label class="block font-medium text-gray-700">انتخاب دسته</label>
+                <label class="block font-medium text-gray-700">نوع</label>
                 <select name="category_id"  class="w-full p-2 border border-gray-300 rounded-md">
-                    <option value="">دسته را انتخاب کنید</option>
-                    @foreach ($productCategories as $productCategory)
-                    <option value="{{ $productCategory->id }}" @if(old('category_id') == $productCategory->id) selected @endif>{{ $productCategory->name }}</option>
-                    @endforeach
+                    <option value="0" @if(old('type') == 0) selected @endif>ساده</option>
+                    <option value="1" @if(old('type') == 1) selected @endif>انتخابی</option>
                 </select>
                 @error('status')
                 <span class="text-red-600 text-sm">{{ $message }}</span>

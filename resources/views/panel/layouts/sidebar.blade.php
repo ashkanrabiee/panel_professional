@@ -49,7 +49,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{route("admin.market.product.create")}}" class="side-menu">
+                    <a href="{{route("admin.market.property.index")}}" class="side-menu">
                         <div class="side-menu__icon"> <i data-feather="activity"></i> </div>
                         <div class="side-menu__title"> فرم کالا</div>
                     </a>

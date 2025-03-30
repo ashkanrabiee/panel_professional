@@ -28,7 +28,7 @@
 @section('content')
 <div class="grid grid-cols-12 gap-6 mt-5">
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-no-wrap items-center mt-2">
-        <button class="button text-white bg-theme-1 shadow-md mr-2"><a href="{{ route('admin.market.property.create') }}">ایجاد بنر</a></button>
+        <button class="button text-white bg-theme-1 shadow-md mr-2"><a href="{{ route('admin.market.value.create', $categoryAttribute->id)}}">ایجاد مقدار فرم کالا جدید</a></button>
         <div class="dropdown relative">
             <button class="dropdown-toggle button px-2 box text-gray-700">
                 <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4" data-feather="plus"></i> </span>
@@ -56,19 +56,23 @@
                 <tr>
                     <th class="whitespace-no-wrap px-4 py-2 border border-gray-300 text-center">#</th>
                     <th class="px-4 py-2 border border-gray-300">نام فرم</th>
-                    <th class="px-4 py-2 border border-gray-300">واحد اندازه گیری</th>
-                    <th class="px-4 py-2 border border-gray-300">دسته والد</th>
+                    <th class="px-4 py-2 border border-gray-300">نام محصول</th>
+                    <th class="px-4 py-2 border border-gray-300">مقدار</th>
+                    <th class="px-4 py-2 border border-gray-300">افزایش قیمت</th>
+                    <th class="px-4 py-2 border border-gray-300">نوع</th>
                     <th class="px-4 py-2 border border-gray-300 text-center">تنظیمات</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($category_attributes as $category_attribute)
+                @foreach ($categoryAttribute->values as $value)
                     <tr class="intro-x bg-white hover:bg-gray-50 transition">
                         <th class="px-4 py-2 border border-gray-300 text-center">{{ $loop->iteration }}</th>
-                        <td class="px-4 py-2 border border-gray-300">{{ $category_attribute->name }}</td>
-                        <td class="px-4 py-2 border border-gray-300">{{ $category_attribute->unit }}</td>
-                        <td class="px-4 py-2 border border-gray-300">{{ $category_attribute->category->name }}</td>
-                       
+                        <td class="px-4 py-2 border border-gray-300">{{ $categoryAttribute->name }}</td>
+                        <td class="px-4 py-2 border border-gray-300">{{ $value->product->name }}</td>
+                        <td class="px-4 py-2 border border-gray-300">{{ json_decode($value->value)->value }}</td>
+                        <td class="px-4 py-2 border border-gray-300">{{ json_decode($value->value)->price_increase }}</td>
+                        <td class="px-4 py-2 border border-gray-300">{{ $value->type == 0 ? 'ساده' : 'انتخابی'}}</td>
+                        
                         <td class="px-4 py-2 border border-gray-300 text-center">
                             <div class="flex justify-center gap-2">
                                 <a href="{{ route('admin.market.value.index', $category_attribute->id) }}" class="btn btn-warning btn-sm">
