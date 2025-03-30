@@ -122,7 +122,7 @@ Route::prefix('admin')->group(function(){
                   });
 
                     //product
-        Route::prefix('product')->group(function () {
+            Route::prefix('product')->group(function () {
             Route::get('/', [ProductController::class, 'index'])->name('admin.market.product.index');
             Route::get('/create', [ProductController::class, 'create'])->name('admin.market.product.create');
             Route::post('/store', [ProductController::class, 'store'])->name('admin.market.product.store');
