@@ -34,7 +34,7 @@ class StoreController extends Controller
 
     public function edit(Product $product)
     {
-        return view('admin.market.store.edit', compact('product'));
+        return view('panel.market.store.edit', compact('product'));
     }
 
     public function update(StoreUpdateRequest $request, Product $product)
