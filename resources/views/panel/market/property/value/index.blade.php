@@ -28,7 +28,7 @@
 @section('content')
 <div class="grid grid-cols-12 gap-6 mt-5">
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-no-wrap items-center mt-2">
-        <button class="button text-white bg-theme-1 shadow-md mr-2"><a href="{{ route('admin.market.category.create') }}">ایجاد بنر</a></button>
+        <button class="button text-white bg-theme-1 shadow-md mr-2"><a href="{{ route('admin.market.value.create', $categoryAttribute->id)}}">ایجاد مقدار فرم کالا جدید</a></button>
         <div class="dropdown relative">
             <button class="dropdown-toggle button px-2 box text-gray-700">
                 <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4" data-feather="plus"></i> </span>
@@ -55,45 +55,44 @@
             <thead class="bg-gray-100 text-gray-700">
                 <tr>
                     <th class="whitespace-no-wrap px-4 py-2 border border-gray-300 text-center">#</th>
-                    <th class="px-4 py-2 border border-gray-300">نظر</th>
-                    <th class="px-4 py-2 border border-gray-300">پاسخ به</th>
-                    <th class="px-4 py-2 border border-gray-300">کد کاربر</th>
-                    <th class="px-4 py-2 border border-gray-300">نویسنده نظر</th>
-                    <th class="px-4 py-2 border border-gray-300">کد پست</th>
-                    <th class="px-4 py-2 border border-gray-300">محصول</th>
-                    <th class="px-4 py-2 border border-gray-300">وضعیت تایید</th>
-                    <th class="px-4 py-2 border border-gray-300">وضعیت کامنت</th>
+                    <th class="px-4 py-2 border border-gray-300">نام فرم</th>
+                    <th class="px-4 py-2 border border-gray-300">نام محصول</th>
+                    <th class="px-4 py-2 border border-gray-300">مقدار</th>
+                    <th class="px-4 py-2 border border-gray-300">افزایش قیمت</th>
+                    <th class="px-4 py-2 border border-gray-300">نوع</th>
                     <th class="px-4 py-2 border border-gray-300 text-center">تنظیمات</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($comments as $comment)
+                @foreach ($categoryAttribute->values as $value)
                     <tr class="intro-x bg-white hover:bg-gray-50 transition">
                         <th class="px-4 py-2 border border-gray-300 text-center">{{ $loop->iteration }}</th>
-                        <td class="px-4 py-2 border border-gray-300">{{ Str::limit($comment->body, 10) }}</td>
-                        <td class="px-4 py-2 border border-gray-300">{{ $comment->parent_id ? Str::limit($comment->parent->body, 10) : '' }}</td>
-                        <td class="px-4 py-2 border border-gray-300">{{ $comment->author_id }}</td>
-                        <td class="px-4 py-2 border border-gray-300">{{ $comment->user->fullName  }}</td>
-                        <td class="px-4 py-2 border border-gray-300">{{ $comment->commentable_id }}</td>
-                        <td class="px-4 py-2 border border-gray-300">{{ $comment->commentable->name }}</td>
-                        <td class="px-4 py-2 border border-gray-300">{{ $comment->approved == 1 ? 'تایید شده ' : 'تایید نشده'}}</td>
-                        <td class="px-4 py-2 border border-gray-300">
-                            <label>
-                                <input id="{{ $comment->id }}" onchange="changeStatus({{ $comment->id }})" data-url="{{ route('admin.market.comment.status', $comment->id) }}" type="checkbox" @if ($comment->status === 1)
-                                checked
-                                @endif>
-                            </label>
+                        <td class="px-4 py-2 border border-gray-300">{{ $categoryAttribute->name }}</td>
+                        <td class="px-4 py-2 border border-gray-300">{{ $value->product->name }}</td>
+                        <td class="px-4 py-2 border border-gray-300">{{ json_decode($value->value)->value }}</td>
+                        <td class="px-4 py-2 border border-gray-300">{{ json_decode($value->value)->price_increase }}</td>
+                        <td class="px-4 py-2 border border-gray-300">{{ $value->type == 0 ? 'ساده' : 'انتخابی'}}</td>
+                        
+                        <td class="px-4 py-2 border border-gray-300 text-center">
+                            <div class="flex justify-center gap-2">
+                                <a href="{{ route('admin.market.value.index', $category_attribute->id) }}" class="btn btn-warning btn-sm">
+                                    <i class="fa fa-list"></i> <i class="fa fa-edit"></i> ویژگی ها
+                                </a>
+                                <a href="{{ route('admin.market.property.edit', $category_attribute->id ) }}"
+                                   class="flex items-center text-blue-600 hover:underline">
+                                    <i data-feather="edit" class="w-4 h-4 mr-1"></i> ویرایش
+                                </a>
+                                <form action="{{ route('admin.market.property.destroy', $category_attribute->id ) }}" method="post"
+                                      class="inline-block">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                            class="flex items-center text-red-600 hover:underline delete">
+                                        <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> حذف
+                                    </button>
+                                </form>
+                            </div>
                         </td>
-                        <td class="px-4 py-2 border border-gray-300">
-                            <a href="{{ route('admin.market.comment.show', $comment->id) }}" class="btn btn-info btn-sm"><i class="fa fa-eye"></i> نمایش</a>
-
-                            @if($comment->approved == 1)
-                            <a href="{{ route('admin.market.comment.approved', $comment->id)}} "class="btn btn-warning btn-sm" type="submit"><i class="fa fa-clock"></i> عدم تایید</a>
-                            @else
-                            <a href="{{ route('admin.market.comment.approved', $comment->id)}}" class="btn btn-success btn-sm text-white" type="submit"><i class="fa fa-check"></i>تایید</a>
-                            @endif
-                        </td>
-
                     </tr>
                 @endforeach
             </tbody>

@@ -57,31 +57,32 @@
         CKEDITOR.replace('description');
     </script>
 
-    <script>
-        $(document).ready(function () {
-            var tags_input = $('#tags');
-            var select_tags = $('#select_tags');
-            var default_tags = tags_input.val();
-            var default_data = [];
+<script>
+    $(document).ready(function () {
+        var tags_input = $('#tags');
+        var select_tags = $('#select_tags');
+        var default_tags = tags_input.val();
+        var default_data = [];
 
-            if (default_tags.length > 0) {
-                default_data = default_tags.split(',');
-            }
+        if (default_tags.length > 0) {
+            default_data = default_tags.split(',');
+        }
 
-            select_tags.select2({
-                placeholder: 'لطفا تگ‌های خود را وارد نمایید',
-                tags: true,
-                data: default_data
-            });
-
-            select_tags.val(default_data).trigger('change');
-
-            $('#form').submit(function () {
-                var selectedTags = select_tags.val();
-                if (selectedTags) {
-                    tags_input.val(selectedTags.join(','));
-                }
-            });
+        select_tags.select2({
+            placeholder: 'لطفا تگ‌های خود را وارد نمایید',
+            tags: true,
+            data: default_data
         });
-    </script>
+
+        select_tags.val(default_data).trigger('change');
+
+        $('#form').submit(function () {
+            var selectedTags = select_tags.val();
+            if (selectedTags) {
+                tags_input.val(selectedTags.join(','));
+            }
+        });
+    });
+</script>
+
 @endsection
