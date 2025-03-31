@@ -167,16 +167,14 @@ Route::prefix('admin')->group(function(){
         });
 
             //store
-            Route::prefix('store')->group(function () {
+        Route::prefix('store')->group(function () {
             Route::get('/', [StoreController::class, 'index'])->name('admin.market.store.index');
-            Route::get('/create/{product}', [StoreController::class, 'create'])->name('admin.market.store.create');
+            Route::get('/add-to-store/{product}', [StoreController::class, 'addToStore'])->name('admin.market.store.add-to-store');
             Route::post('/store/{product}', [StoreController::class, 'store'])->name('admin.market.store.store');
             Route::get('/edit/{product}', [StoreController::class, 'edit'])->name('admin.market.store.edit');
             Route::put('/update/{product}', [StoreController::class, 'update'])->name('admin.market.store.update');
         });
-
-
-                  });
+      });
 
 
 

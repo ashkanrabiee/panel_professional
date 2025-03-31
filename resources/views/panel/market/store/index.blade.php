@@ -1,19 +1,38 @@
 @extends('panel.layouts.master')
 
+@section('head-tag')
+    <title>بنر ها</title>
+    
+    <style>
+
+        .form-check-input {
+            background-color: red !important;
+            border-color: red !important;
+        }
+
+       
+        .form-check-input:checked {
+            background-color: blue !important;
+            border-color: blue !important;
+        }
+
+     
+        .form-check-input::before {
+            background-color: white !important;
+        }
+    </style>
+@endsection
+
+
 
 @section('content')
 <div class="grid grid-cols-12 gap-6 mt-5">
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-no-wrap items-center mt-2">
-        
-		@if(session('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>موفق!</strong> {{ session('success') }}
-        
-    </div>
-@endif
-
+        <button class="button text-white bg-theme-1 shadow-md mr-2"><a href="{{ route('admin.content.banner.create') }}">ایجاد بنر</a></button>
         <div class="dropdown relative">
-          
+            <button class="dropdown-toggle button px-2 box text-gray-700">
+                <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4" data-feather="plus"></i> </span>
+            </button>
             <div class="dropdown-box mt-10 absolute w-40 top-0 left-0 z-20">
                 <div class="dropdown-box__content box p-2">
                     <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white hover:bg-gray-200 rounded-md"> <i data-feather="printer" class="w-4 h-4 mr-2"></i> Print </a>
@@ -35,56 +54,46 @@
         <table class="table table-report -mt-2">
             <thead>
                 <tr>
-                    <th class="whitespace-no-wrap">IMAGES</th>
-                    <th class="whitespace-no-wrap">PRODUCT NAME</th>
-                    <th class="text-center whitespace-no-wrap">STOCK</th>
-                    <th class="text-center whitespace-no-wrap">STATUS</th>
-                    <th class="text-center whitespace-no-wrap">ACTIONS</th>
+                    <th class="whitespace-no-wrap">#</th>
+                    <th class="text-center whitespace-no-wrap">نام کالا	</th>
+                    <th class="text-center whitespace-no-wrap">تصویر کالا</th>
+                    <th class="text-center whitespace-no-wrap">تعداد قابل فروش</th>
+                    <th class="text-center whitespace-no-wrap">تعداد رزرو شده</th>
+                    <th class="text-center whitespace-no-wrap">تعداد فروخته شده	</th>
+                    <th class="text-center whitespace-no-wrap">تنظیمات</th>
                 </tr>
             </thead>
             <tbody>
-             
-
-
-
+                @foreach ($products as $product)
                 <tr class="intro-x">
-                    <td class="w-40">
-                        <div class="flex">
-                            <div class="w-10 h-10 image-fit zoom-in">
-                                <img alt="Midone Tailwind HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-14.jpg" title="Uploaded at 5 August 2020">
-                            </div>
-                            <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                <img alt="Midone Tailwind HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-15.jpg" title="Uploaded at 5 August 2020">
-                            </div>
-                            <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                <img alt="Midone Tailwind HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-13.jpg" title="Uploaded at 5 August 2020">
-                            </div>
-                        </div>
-                    </td>
+                    <th>{{ $loop->iteration }}</th>
+                    <td class="text-center">{{ $product->name }}</td>
                     <td>
-                        <a href="" class="font-medium whitespace-no-wrap">Dell XPS 13</a> 
-                        <div class="text-gray-600 text-xs whitespace-no-wrap">PC &amp; Laptop</div>
-                    </td>
-                    <td class="text-center">144</td>
-                    <td class="w-40">
-                        <div class="flex items-center justify-center text-theme-6"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Inactive </div>
-                    </td>
+                        <img src="{{ asset(data_get($product, 'image.indexArray.' . data_get($product, 'image.currentImage'), 'path/to/default/image.jpg')) }}" alt="" width="100" height="50">
+                    </td>                    
+                    <td class="text-center">{{ $product->marketable_number }}</td>
+                    <td class="text-center">{{ $product->frozen_number }}</td>
+                    <td class="text-center">{{ $product->sold_number }}</td>
+                   
                     <td class="table-report__action w-56">
-                        <div class="flex justify-center items-center">
-                            <a class="flex items-center mr-3" href="{{ route('admin.market.store.edit',[1]) }}"> <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                            <a class="flex items-center mr-3" href="{{ route('admin.market.store.create',[1]) }}"> <i data-feather="check-square" class="w-4 h-4 mr-1"></i> add count </a>
-                            <a class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
+                        <div class="flex justify-center items-center space-x-1">
+                            <a href="{{ route('admin.market.store.add-to-store', $product->id) }}" 
+                                class="btn btn-success text-xs flex items-center px-2 py-1 rounded-lg shadow-md hover:bg-green-700 transition-all duration-200">
+                                <i class="fa fa-plus-circle text-sm mr-1"></i> افزایش موجودی
+                            </a>
+                            <a href="{{ route('admin.market.store.edit', $product->id) }}" 
+                                class="btn btn-warning text-xs flex items-center px-2 py-1 rounded-lg shadow-md hover:bg-yellow-700 transition-all duration-200">
+                                <i class="fa fa-edit text-sm mr-1"></i> اصلاح موجودی
+                            </a>
                         </div>
                     </td>
+                    
                 </tr>
-
-
-
-
-
+                @endforeach
             </tbody>
         </table>
     </div>
+    
     <!-- END: Data List -->
     <!-- BEGIN: Pagination -->
     <div class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-no-wrap items-center">
@@ -118,4 +127,112 @@
 </div>
 
 
+@endsection
+
+@section('script')
+    
+
+<script type="text/javascript">
+
+    function changeStatus(id){
+        var element = $("#" + id)
+        var url = element.attr('data-url')
+        var elementValue = !element.prop('checked');
+
+        $.ajax({
+            url : url,
+            type : "GET",
+            success : function(response){
+                if(response.status){
+                    if(response.checked){
+                        element.prop('checked', true);
+                        successToast('بنر  با موفقیت فعال شد')
+                    }
+                    else{
+                        element.prop('checked', false);
+                        successToast('بنر  با موفقیت غیر فعال شد')
+                    }
+                }
+                else{
+                    element.prop('checked', elementValue);
+                    errorToast('هنگام ویرایش مشکلی بوجود امده است')
+                }
+            },
+            error : function(){
+                element.prop('checked', elementValue);
+                errorToast('ارتباط برقرار نشد')
+            }
+        });
+
+        function successToast(message){
+
+            var successToastTag = '<section class="toast" data-delay="5000">\n' +
+                '<section class="toast-body py-3 d-flex bg-success text-white">\n' +
+                    '<strong class="ml-auto">' + message + '</strong>\n' +
+                    '<button type="button" class="mr-2 close" data-dismiss="toast" aria-label="Close">\n' +
+                        '<span aria-hidden="true">&times;</span>\n' +
+                        '</button>\n' +
+                        '</section>\n' +
+                        '</section>';
+
+                        $('.toast-wrapper').append(successToastTag);
+                        $('.toast').toast('show').delay(5500).queue(function() {
+                            $(this).remove();
+                        })
+        }
+
+        function errorToast(message){
+
+            var errorToastTag = '<section class="toast" data-delay="5000">\n' +
+                '<section class="toast-body py-3 d-flex bg-danger text-white">\n' +
+                    '<strong class="ml-auto">' + message + '</strong>\n' +
+                    '<button type="button" class="mr-2 close" data-dismiss="toast" aria-label="Close">\n' +
+                        '<span aria-hidden="true">&times;</span>\n' +
+                        '</button>\n' +
+                        '</section>\n' +
+                        '</section>';
+
+                        $('.toast-wrapper').append(errorToastTag);
+                        $('.toast').toast('show').delay(5500).queue(function() {
+                            $(this).remove();
+                        })
+        }
+    }
+
+    $(document).on('click', '.delete', function (e) {
+    e.preventDefault();
+    var form = $(this).closest('form');
+    Swal.fire({
+        title: 'آیا مطمئن هستید؟',
+        text: "این عملیات قابل بازگشت نیست!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'بله، حذف کن!',
+        cancelButtonText: 'لغو'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            form.submit();
+        }
+    });
+});
+
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let switchInput = document.getElementById("customSwitch");
+
+        switchInput.addEventListener("change", function () {
+            Swal.fire({
+                icon: this.checked ? "success" : "error",
+                title: this.checked ? "وضعیت: فعال شد ✅" : "وضعیت: غیرفعال شد ❌",
+                confirmButtonText: "باشه"
+            });
+        });
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@include('panel.alerts.sweetalert.delete-confirm', ['className' => 'delete'])
 @endsection
