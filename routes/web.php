@@ -9,8 +9,8 @@ use App\Http\Controllers\Admin\{AdminDashboardController};
 
 use App\Http\Controllers\Admin\Content\{BannnerController, CategoryController as ContentCategoryController, CommentController as ContentCommentController, FaqController, MenuController, PostController};
 //Market section
-use App\Http\Controllers\Admin\Market\{OrderController,StoreController,GalleryController,PaymentController,ProductController,DiscountController,PropertyController,GuaranteeController,ProductColorController ,PropertyValueController,BrandController, CategoryController as MarketCategoryController, CommentController as MarketCommentController, DeliveryController};
-
+use App\Http\Controllers\Admin\Market\{OrderController,StoreController,GalleryController,PaymentController,ProductController,DiscountController,PropertyController,GuaranteeController,ProductColorController ,PropertyValueController,BrandController, CategoryController as CategoryMarketController, DeliveryController};
+use App\Http\Controllers\Admin\Market\CommentController as MorphyComment;
 //setting
 use App\Http\Controllers\Admin\Setting\SettingController;
 
@@ -31,12 +31,12 @@ Route::prefix('admin')->group(function(){
 
                         //category
                         Route::prefix('category')->group(function(){
-                              Route::get('/' ,[MarketCategoryController::class , 'index'])->name('admin.market.category.index');
-                              Route::get('/create' ,[MarketCategoryController::class , 'create'])->name('admin.market.category.create');
-                              Route::post('/store' ,[MarketCategoryController::class , 'store'])->name('admin.market.category.store');
-                              Route::get('/edit/{productCategory}' ,[MarketCategoryController::class , 'edit'])->name('admin.market.category.edit');
-                              Route::put('/update/{productCategory}' ,[MarketCategoryController::class , 'update'])->name('admin.market.category.update');
-                              Route::delete('/destroy/{productCategory}' ,[MarketCategoryController::class , 'destroy'])->name('admin.market.category.destroy');
+                              Route::get('/' ,[CategoryMarketController::class , 'index'])->name('admin.market.category.index');
+                              Route::get('/create' ,[CategoryMarketController::class , 'create'])->name('admin.market.category.create');
+                              Route::post('/store' ,[CategoryMarketController::class , 'store'])->name('admin.market.category.store');
+                              Route::get('/edit/{productCategory}' ,[CategoryMarketController::class , 'edit'])->name('admin.market.category.edit');
+                              Route::put('/update/{productCategory}' ,[CategoryMarketController::class , 'update'])->name('admin.market.category.update');
+                              Route::delete('/destroy/{productCategory}' ,[CategoryMarketController::class , 'destroy'])->name('admin.market.category.destroy');
                         });
 
                         //brand
@@ -51,14 +51,14 @@ Route::prefix('admin')->group(function(){
                                           
                          //comment
                          Route::prefix('comment')->group(function(){
-                              Route::get('/' ,[MarketCategoryController::class , 'index'])->name('admin.market.comment.index');
-                              Route::get('/create' ,[MarketCategoryController::class , 'create'])->name('admin.market.comment.create');
-                              Route::post('/store' ,[MarketCategoryController::class , 'store'])->name('admin.market.comment.store');
-                              Route::get('/show' ,[MarketCategoryController::class , 'show'])->name('admin.market.comment.show');
-                              Route::get('/edit' ,[MarketCategoryController::class , 'edit'])->name('admin.market.comment.edit');
-                              Route::put('/update' ,[MarketCategoryController::class , 'update'])->name('admin.market.comment.update');
-                              Route::delete('/destroy',[MarketCategoryController::class , 'destroy'])->name('admin.market.comment.destroy');
-                              Route::get('/status' ,[MarketCategoryController::class , 'status'])->name('admin.market.comment.status');
+                              Route::get('/' ,[MorphyComment::class , 'index'])->name('admin.market.comment.index');
+                              Route::get('/create' ,[MorphyComment::class , 'create'])->name('admin.market.comment.create');
+                              Route::post('/store' ,[MorphyComment::class , 'store'])->name('admin.market.comment.store');
+                              Route::get('/show' ,[MorphyComment::class , 'show'])->name('admin.market.comment.show');
+                              Route::get('/edit' ,[MorphyComment::class , 'edit'])->name('admin.market.comment.edit');
+                              Route::put('/update' ,[MorphyComment::class , 'update'])->name('admin.market.comment.update');
+                              Route::delete('/destroy',[MorphyComment::class , 'destroy'])->name('admin.market.comment.destroy');
+                              Route::get('/status' ,[MorphyComment::class , 'status'])->name('admin.market.comment.status');
                         });
                          //delivery
                          Route::prefix('delivery')->group(function(){
