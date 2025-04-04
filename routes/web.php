@@ -13,7 +13,8 @@ use App\Http\Controllers\Admin\Market\{OrderController,StoreController,GalleryCo
 use App\Http\Controllers\Admin\Market\CommentController as MorphyComment;
 //setting
 use App\Http\Controllers\Admin\Setting\SettingController;
-
+// user
+use App\Http\Controllers\Admin\User\RoleController;
 
 
 
@@ -25,7 +26,18 @@ Route::get('/',[AdminDashboardController::class , 'index'])->name('admin.home');
 Route::prefix('admin')->group(function(){
 
       
-
+                  // user section start
+                  Route::prefix('user')->group(function(){
+                        Route::prefix('role')->group(function(){
+                              Route::get('/' ,[RoleController::class , 'index'])->name('admin.user.role.index');
+                              Route::get('/create' ,[RoleController::class , 'create'])->name('admin.user.role.create');
+                              Route::post('/store' ,[RoleController::class , 'store'])->name('admin.user.role.store');
+                              Route::get('/edit/{Role}' ,[RoleController::class , 'edit'])->name('admin.user.role.edit');
+                              Route::put('/update/{Role}' ,[RoleController::class , 'update'])->name('admin.user.role.update');
+                              Route::delete('/destroy/{Role}' ,[RoleController::class , 'destroy'])->name('admin.user.role.destroy');
+                  });
+            });
+                  // user section end
                   //market section start 
                   Route::prefix('market')->group(function(){
 
