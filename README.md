@@ -62,7 +62,7 @@ MySQL
 
 # Authentication
 OTP
-
+```
 # Clone the repository
 git clone https://github.com/your-username/ecommerce-project.git
 cd ecommerce-project
