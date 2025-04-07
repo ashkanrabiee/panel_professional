@@ -64,23 +64,29 @@ MySQL
 OTP
 ```
 # Clone the repository
-git clone https://github.com/your-username/ecommerce-project.git
-cd ecommerce-project
-
+```baSH
+$ git clone https://github.com/https://github.com/ashkanrabiee/panel_professional.git
+$ cd ecommerce-project
+```
 # Install backend and frontend dependencies
-composer install
-npm install && npm run dev
-
+```bash
+$ composer install
+$ npm install && npm run dev
+```
 # Set up .env
-cp .env.example .env
-php artisan key:generate
+```bash
+$ cp .env.example .env
+$ php artisan key:generate
+```
 
 # Run database migrations with demo data
-php artisan migrate --seed
-
+```bash
+$ php artisan migrate --seed
+```
 # Start the development server
+```bash
 php artisan serve
-
+```
 🧑‍💻 How the Admin Panel Works
 The Admin Panel allows administrators to manage various aspects of the online store, including products, orders, inventory, and customers.
 
