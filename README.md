@@ -12,4 +12,4 @@ Panel Professional is a sophisticated admin panel developed as a collaborative p
 **Technologies:**  
 `Laravel` ,`JavaScript`, `HTML/CSS` (and other JS libraries as applicable)
 
----
+--
